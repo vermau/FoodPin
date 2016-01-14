@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF66835E1C472175003BC35A /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66835D1C472175003BC35A /* RestaurantDetailViewController.swift */; };
 		FFF645701BCFA390004A8B90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6456F1BCFA390004A8B90 /* AppDelegate.swift */; };
 		FFF645751BCFA390004A8B90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFF645731BCFA390004A8B90 /* Main.storyboard */; };
 		FFF645771BCFA390004A8B90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFF645761BCFA390004A8B90 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF66835D1C472175003BC35A /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		FFF6456C1BCFA390004A8B90 /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF6456F1BCFA390004A8B90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFF645741BCFA390004A8B90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,8 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				FFF6456F1BCFA390004A8B90 /* AppDelegate.swift */,
-				FFF645811BCFA563004A8B90 /* RestaurantTableViewController.swift */,
 				FFF645831BCFF555004A8B90 /* RestaurantTableViewCell.swift */,
+				FFF645811BCFA563004A8B90 /* RestaurantTableViewController.swift */,
+				FF66835D1C472175003BC35A /* RestaurantDetailViewController.swift */,
 				FFF645731BCFA390004A8B90 /* Main.storyboard */,
 				FFF645781BCFA390004A8B90 /* LaunchScreen.storyboard */,
 				FFF645761BCFA390004A8B90 /* Assets.xcassets */,
@@ -140,6 +143,7 @@
 			files = (
 				FFF645821BCFA563004A8B90 /* RestaurantTableViewController.swift in Sources */,
 				FFF645841BCFF555004A8B90 /* RestaurantTableViewCell.swift in Sources */,
+				FF66835E1C472175003BC35A /* RestaurantDetailViewController.swift in Sources */,
 				FFF645701BCFA390004A8B90 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

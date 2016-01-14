@@ -89,7 +89,7 @@ class RestaurantTableViewController: UITableViewController {
     /*
         -- This method is called when a row is selected in the Table
     */
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    /*override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var visitedTitle = "I have been here"
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do ??", preferredStyle: UIAlertControllerStyle.ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
@@ -120,7 +120,7 @@ class RestaurantTableViewController: UITableViewController {
         optionMenu.addAction(cancelAction)
         
         self.presentViewController(optionMenu, animated: true, completion: nil)
-    }
+    }*/
 
     /*
     // Override to support conditional editing of the table view.
@@ -148,6 +148,16 @@ class RestaurantTableViewController: UITableViewController {
             */
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             })
+
+        /*
+            // -- Important Point To Be Notes Here
+            // As per new policy of Facebook, setting the Initial Text for any message posted to the Facebook app
+            // ( if Facebook app is installed on user's device and tries to POST on facebook from your app )
+            // is wrong and is not supported by the Facebook app. Images can be POSTED though.
+            // Facebook automatically removes the Initial Text even if your try to post it through your code
+            // However if Facebook app is not installed on device and user logins to Facebook account through Settings
+            // He will be able to post DEFAULT TEXT Message along with Image as this still works
+        */
 
         // Define the SOCIAL SHARING Action
         let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Share", handler: {(action, indexPath) -> Void in
@@ -204,14 +214,18 @@ class RestaurantTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showRestaurantDetailSegue" {
+            
+            // -- If the user selects a row before clicking the back button in TableView, we will retrieve the indexPath of the row in a variable
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let destinationViewController = segue.destinationViewController as! RestaurantDetailViewController
+                destinationViewController.restaurantImage = restaurantImages[indexPath.row]
+            }
+        }
     }
-    */
 
 }
