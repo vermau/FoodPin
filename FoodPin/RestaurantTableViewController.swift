@@ -58,6 +58,12 @@ class RestaurantTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // --Set the title of the RestaurantTableViewController
+        title = "Food Pin"
+        
+        // --Remove the title of the backBarButtonItem so that it only shows "<" in the NavigationBar
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
