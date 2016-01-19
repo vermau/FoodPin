@@ -24,6 +24,9 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         // --Load the image in the ImageView
         restaurantImageView.image = UIImage(named: restaurant.image)
         
+        detailTableView.estimatedRowHeight = 36.0
+        detailTableView.rowHeight = UITableViewAutomaticDimension
+        
         // --Change the background color of the DetailTableView
         detailTableView.backgroundColor = UIColor(red: 242.0/255.0, green: 241.0/255.0, blue: 239.0/255.0, alpha: 1.0)
 
@@ -39,12 +42,34 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = false
+        
+        /*
+            -- If the NavigationBar is set to hide on scroll down in the Main ViewController
+            -- it will remain hidden in the Destination ViewController as well even if hidesBarsOnSwipe property of NavigationController is set to FALSE
+            -- We have to specifically tell the app to show the NavigationBar in the Destination ViewController
+        */
+        
+        // --Specific instruction to the app to show the NavigationBar
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
+
+    /*
+                    ---------------------------------------
+                        Mark: - TableView data population
+                    ---------------------------------------
+    */
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! RestaurantDetailViewTableCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! RestaurantDetailTableViewCell
         
         // --Makes the background of the cell filled with content as transparent background
         // --so that the background color of the DetailTableView can be seen
@@ -62,6 +87,9 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
             cell.fieldLabel.text = "Location"
             cell.valueLabel.text = restaurant.location
         case 3:
+            cell.fieldLabel.text = "Phone"
+            cell.valueLabel.text = restaurant.phone
+        case 4:
             cell.fieldLabel.text = "Been Here"
             cell.valueLabel.text = (restaurant.isVisited) ? "Yes I have been here before" : "No"
         default:
@@ -71,14 +99,30 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         
         return cell
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    /*
+                    ---------------------------------------
+                        Mark: - StatusBar customization
+                    ---------------------------------------
+    */
+    override func prefersStatusBarHidden() -> Bool {
+        return false
     }
+    
+    /*override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.Default
+    }*/
+    
+    /*
+                    ---------------------------------------
+                        MARK: - Navigation
+                    ---------------------------------------
     */
 
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /*override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }*/
 }

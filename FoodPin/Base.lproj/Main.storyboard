@@ -70,7 +70,7 @@
                                     <outlet property="lblName" destination="NhC-ii-e0a" id="yrW-w9-ble"/>
                                     <outlet property="lblType" destination="SqE-HT-tun" id="iik-2A-Xci"/>
                                     <outlet property="thumbnailImageView" destination="xcx-2r-0cf" id="rSj-0E-Aec"/>
-                                    <segue destination="d5I-pd-RXe" kind="show" identifier="showRestaurantDetailSegue" id="OVc-1K-fyg"/>
+                                    <segue destination="d5I-pd-RXe" kind="show" identifier="restaurantDetailSegue" id="OVc-1K-fyg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -98,7 +98,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="36" id="s9w-Wm-poe" customClass="RestaurantDetailViewTableCell" customModule="FoodPin" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="36" id="s9w-Wm-poe" customClass="RestaurantDetailTableViewCell" customModule="FoodPin" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="392" width="600" height="36"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s9w-Wm-poe" id="nne-Ti-OB7">
@@ -114,7 +114,7 @@
                                                     <color key="textColor" red="0.97506791353225708" green="0.27071568369865417" blue="0.25493812561035156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7b-Hk-B7p">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7b-Hk-B7p">
                                                     <rect key="frame" x="195" y="0.0" width="389" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -129,6 +129,8 @@
                                     <constraints>
                                         <constraint firstItem="sqA-PY-UJc" firstAttribute="centerY" secondItem="nne-Ti-OB7" secondAttribute="centerY" id="6Ma-ya-olH"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="sqA-PY-UJc" secondAttribute="trailing" id="ilc-Kk-Fji"/>
+                                        <constraint firstItem="sqA-PY-UJc" firstAttribute="top" secondItem="nne-Ti-OB7" secondAttribute="topMargin" constant="-1" id="uX8-gG-fFJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="sqA-PY-UJc" secondAttribute="bottom" constant="-1" id="z3N-GL-a1G"/>
                                         <constraint firstItem="sqA-PY-UJc" firstAttribute="leading" secondItem="nne-Ti-OB7" secondAttribute="leadingMargin" id="ziq-yA-4Eu"/>
                                     </constraints>
                                 </tableViewCellContentView>

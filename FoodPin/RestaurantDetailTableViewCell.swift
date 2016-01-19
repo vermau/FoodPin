@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RestaurantDetailViewTableCell: UITableViewCell {
+class RestaurantDetailTableViewCell: UITableViewCell {
 
     @IBOutlet weak var fieldLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!

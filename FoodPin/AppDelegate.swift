@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        // --Change the Status Bar to light color for the entire application
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
         // --Change the background color of the Navigation Bar for whole application
         UINavigationBar.appearance().barTintColor = UIColor(red: 242.0/255.0, green: 116.0/255.0, blue: 119.0/255.0, alpha: 1.0)
 
