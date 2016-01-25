@@ -12,6 +12,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     
     @IBOutlet weak var restaurantImageView : UIImageView!
     @IBOutlet weak var detailTableView : UITableView!
+    @IBOutlet weak var ratingButton : UIButton!
     
     var restaurant: Restaurant!
     
@@ -45,14 +46,16 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.hidesBarsOnSwipe = false
+        // --Make the rating button round
+        ratingButton.layer.cornerRadius = 20 // --'cuz the Width and Height of the button is 40
+        ratingButton.clipsToBounds = true
         
         /*
-            -- If the NavigationBar is set to hide on scroll down in the Main ViewController
-            -- it will remain hidden in the Destination ViewController as well even if hidesBarsOnSwipe property of NavigationController is set to FALSE
-            -- We have to specifically tell the app to show the NavigationBar in the Destination ViewController
+        -- If the NavigationBar is set to hide on scroll down in the Main ViewController
+        -- it will remain hidden in the Destination ViewController as well even if hidesBarsOnSwipe property of NavigationController is set to FALSE
+        -- We have to specifically tell the app to show the NavigationBar in the Destination ViewController
         */
-        
+        navigationController?.hidesBarsOnSwipe = false
         // --Specific instruction to the app to show the NavigationBar
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -100,6 +103,17 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         return cell
     }
 
+
+    /*
+                    ---------------------------------------
+                        Mark: - Navigation
+                    ---------------------------------------
+    */
+    @IBAction func close(segue: UIStoryboardSegue) {
+        // -- Write code for additional logic
+        // -- that runs upon executing UnwindSegue
+        // -- from the ReviewContoller
+    }
     
     /*
                     ---------------------------------------
