@@ -302,7 +302,7 @@ class RestaurantTableViewController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "restaurantDetailSegue" {
+        if segue.identifier == "restaurantDetail" {
             
             // -- If the user selects a row before clicking the back button in TableView, we will retrieve the indexPath of the row in a variable
             if let indexPath = self.tableView.indexPathForSelectedRow {
