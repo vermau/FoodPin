@@ -154,15 +154,15 @@
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgf-Nk-GqO">
                                 <rect key="frame" x="555" y="72" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.97506791353225708" green="0.27071568369865417" blue="0.25493812561035156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.30122697353363037" green="0.69987016916275024" blue="0.85862690210342407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kMg-bP-WBb"/>
                                     <constraint firstAttribute="width" constant="40" id="nwY-XD-KRE"/>
                                 </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.76730036735534668" green="0.93730425834655762" blue="0.97141784429550171" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button" image="rating"/>
                                 <connections>
-                                    <segue destination="0nx-ak-f42" kind="presentation" identifier="showReview" id="wRa-3k-v7L"/>
+                                    <segue destination="0nx-ak-f42" kind="presentation" identifier="reviewToDetailView" id="wRa-3k-v7L"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -212,12 +212,11 @@
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KkD-Vb-JLT">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
-                                        <color key="backgroundColor" red="0.97506791353225708" green="0.27071568369865417" blue="0.25493812561035156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="5bZ-r6-pBX"/>
                                             <constraint firstAttribute="height" constant="70" id="IXa-ck-p6N"/>
                                         </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.97506791353225708" green="0.27071568369865417" blue="0.25493812561035156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="dislike"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -227,12 +226,11 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9U-M8-0Su">
                                         <rect key="frame" x="90" y="0.0" width="70" height="70"/>
-                                        <color key="backgroundColor" red="0.97506791353225708" green="0.27071568369865417" blue="0.25493812561035156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="aTa-wX-Ach"/>
                                             <constraint firstAttribute="height" constant="70" id="nfY-qv-54Y"/>
                                         </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.97283846139907837" green="0.55858141183853149" blue="0.23947069048881531" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="good"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -242,12 +240,11 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4p-91-hUR">
                                         <rect key="frame" x="180" y="0.0" width="70" height="70"/>
-                                        <color key="backgroundColor" red="0.97506791353225708" green="0.27071568369865417" blue="0.25493812561035156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="d9g-5T-wR0"/>
                                             <constraint firstAttribute="height" constant="70" id="o7l-Ub-Oyc"/>
                                         </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.30646857619285583" green="0.91860681772232056" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="great"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -286,6 +283,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImageView" destination="2ze-v2-UFR" id="Fas-4s-IQo"/>
+                        <outlet property="ratingStackView" destination="gDv-pX-9nG" id="PEj-oa-JIl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y2E-1b-sHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
