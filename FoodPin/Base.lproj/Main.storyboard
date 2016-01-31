@@ -225,6 +225,9 @@
                             <constraint firstItem="aMd-s9-R2s" firstAttribute="leading" secondItem="Pmf-fc-Nv8" secondAttribute="leading" id="jzj-cR-7se"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="aMd-s9-R2s" id="vbS-id-XZB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKm-Xe-GRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

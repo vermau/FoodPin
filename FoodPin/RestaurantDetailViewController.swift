@@ -114,24 +114,6 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
 
     /*
                     ---------------------------------------
-                        Mark: - Navigation
-                    ---------------------------------------
-    */
-    @IBAction func close(segue: UIStoryboardSegue) {
-        // -- Write code for additional logic
-        // -- that runs upon executing UnwindSegue
-        // -- from the ReviewContoller
-        
-        if let reviewViewController = segue.sourceViewController as? ReviewViewController {
-            if let newRating = reviewViewController.rating {
-                ratingButton.setImage(UIImage(named: newRating), forState: UIControlState.Normal)
-                restaurant.rating = newRating
-            }
-        }
-    }
-    
-    /*
-                    ---------------------------------------
                         Mark: - StatusBar customization
                     ---------------------------------------
     */
@@ -150,8 +132,25 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     */
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    /*override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    @IBAction func close(segue: UIStoryboardSegue) {
+        // -- Write code for additional logic
+        // -- that runs upon executing UnwindSegue
+        // -- from the ReviewContoller
+        
+        if let reviewViewController = segue.sourceViewController as? ReviewViewController {
+            if let newRating = reviewViewController.rating {
+                ratingButton.setImage(UIImage(named: newRating), forState: UIControlState.Normal)
+                restaurant.rating = newRating
+            }
+        }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }*/
+        if segue.identifier == "showMap" {
+            let destinationViewController = segue.destinationViewController as! MapViewController
+            destinationViewController.restaurant = restaurant
+        }
+    }
 }
