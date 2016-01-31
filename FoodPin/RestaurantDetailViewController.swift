@@ -13,6 +13,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     @IBOutlet weak var restaurantImageView : UIImageView!
     @IBOutlet weak var detailTableView : UITableView!
     @IBOutlet weak var ratingButton : UIButton!
+    @IBOutlet weak var mapButton : UIButton!
     
     var restaurant: Restaurant!
     
@@ -22,6 +23,17 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         // --Set the title of the DetailTableViewController
         title = restaurant.name
         
+        /*
+        -- Using Nil Coalescing Operator here
+        -- ?? will return the value of restaurant.rating if it is not nil
+        -- otherwise it will return "rating"
+        */
+        ratingButton.setImage(UIImage(named: restaurant.rating ?? "rating"), forState: UIControlState.Normal)
+
+        // --Make the rating button round
+        ratingButton.layer.cornerRadius = 20 // --'cuz the Width and Height of the button is 40
+        ratingButton.clipsToBounds = true
+
         // --Load the image in the ImageView
         restaurantImageView.image = UIImage(named: restaurant.image)
         
@@ -46,14 +58,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // --Make the rating button round
-        ratingButton.layer.cornerRadius = 20 // --'cuz the Width and Height of the button is 40
-        ratingButton.clipsToBounds = true
-        
         /*
-        -- If the NavigationBar is set to hide on scroll down in the Main ViewController
-        -- it will remain hidden in the Destination ViewController as well even if hidesBarsOnSwipe property of NavigationController is set to FALSE
-        -- We have to specifically tell the app to show the NavigationBar in the Destination ViewController
+            -- If the NavigationBar is set to hide on scroll down in the Main ViewController
+            -- it will remain hidden in the Destination ViewController as well even if hidesBarsOnSwipe property of NavigationController is set to FALSE
+            -- We have to specifically tell the app to show the NavigationBar in the Destination ViewController
         */
         navigationController?.hidesBarsOnSwipe = false
         // --Specific instruction to the app to show the NavigationBar
@@ -113,6 +121,13 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         // -- Write code for additional logic
         // -- that runs upon executing UnwindSegue
         // -- from the ReviewContoller
+        
+        if let reviewViewController = segue.sourceViewController as? ReviewViewController {
+            if let newRating = reviewViewController.rating {
+                ratingButton.setImage(UIImage(named: newRating), forState: UIControlState.Normal)
+                restaurant.rating = newRating
+            }
+        }
     }
     
     /*
