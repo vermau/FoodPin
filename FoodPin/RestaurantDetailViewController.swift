@@ -137,11 +137,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         // -- that runs upon executing UnwindSegue
         // -- from the ReviewContoller
         
-        if let reviewViewController = segue.sourceViewController as? ReviewViewController {
-            if let newRating = reviewViewController.rating {
-                ratingButton.setImage(UIImage(named: newRating), forState: UIControlState.Normal)
-                restaurant.rating = newRating
-            }
+        let reviewViewController = segue.sourceViewController as! ReviewViewController
+        if let newRating = reviewViewController.rating {
+            ratingButton.setImage(UIImage(named: newRating), forState: UIControlState.Normal)
+            restaurant.rating = newRating
         }
     }
 

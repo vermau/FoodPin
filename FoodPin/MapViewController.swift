@@ -9,13 +9,22 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView : MKMapView!
     var restaurant : Restaurant!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // -- Configure mapView to show traffic, scale and compass
+        mapView.showsTraffic = true
+        mapView.showsScale = true
+        mapView.showsCompass = true
+        
+        // -- Assign the MapViewController as the delegate object for the MapView
+        // -- So that MapView looks for and uses the custom implementation of methods required to call and display the AnnotationView on itself
+        mapView.delegate = self
 
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(restaurant.location, completionHandler: {
@@ -33,14 +42,11 @@ class MapViewController: UIViewController {
                 let annotation = MKPointAnnotation()
                 annotation.title = self.restaurant.name
                 annotation.subtitle = self.restaurant.type
+                annotation.coordinate = placemark.location!.coordinate
                 
-                if let location = placemark.location {
-                    annotation.coordinate = location.coordinate
-                    
-                    // -- Display the annotation on the Map
-                    self.mapView.showAnnotations([annotation], animated: true)
-                    self.mapView.selectAnnotation(annotation, animated: true)
-                }
+                // -- Display the annotation on the Map
+                self.mapView.showAnnotations([annotation], animated: true)
+                self.mapView.selectAnnotation(annotation, animated: true)
             }
         })
     }
@@ -50,7 +56,38 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    // -- This method is called by the MapView before PREPARING and DISPLAYING the AnnotationView on itself
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "myPin"
+        
+        if annotation.isKindOfClass(MKUserLocation) {
+            return nil
+        }
+        
+        /*  
+            -- For performance reasons, it is preferred to reuse any existing annotation view instead of creating a new one.
+            -- The map view is intelligent enough to cache unused annotation views that it isn't using.
+        */
+        var annotationView: MKPinAnnotationView? = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView
+        
+        /*  
+            -- If no unused annotation view is available, dequeueReusableAnnotationViewWithIdentifier() will return nil
+            -- In that case create a new annotation view of type MKPinAnnotationView
+            -- 'cuz we want to show the Pin view on the Map
+        */
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.pinTintColor = UIColor.orangeColor()
+            annotationView!.canShowCallout = true
+        }
+        
+        let leftImageView = UIImageView(frame: CGRectMake(0.0, 0.0, 55.0, 55.0))
+        leftImageView.image = UIImage(named: restaurant.image)
+        annotationView!.leftCalloutAccessoryView = leftImageView
+        
+        return annotationView
+    }
+    
     /*
     // MARK: - Navigation
 
