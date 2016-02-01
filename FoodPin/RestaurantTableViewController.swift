@@ -300,6 +300,10 @@ class RestaurantTableViewController: UITableViewController {
                     ---------------------------------------
     */
     
+    @IBAction func close(segue: UIStoryboardSegue) {
+        
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "restaurantDetail" {
