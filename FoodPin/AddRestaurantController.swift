@@ -8,11 +8,22 @@
 
 import UIKit
 
-class AddRestaurantController: UITableViewController {
+class AddRestaurantController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var imageView : UIImageView!
+    @IBOutlet private weak var nameTextField : UITextField!
+    @IBOutlet private weak var typeTextField : UITextField!
+    @IBOutlet private weak var phoneTextField : UITextField!
+    @IBOutlet private weak var locationTextField : UITextField!
+    @IBOutlet private weak var noButton : UIButton!
+    @IBOutlet private weak var yesButton : UIButton!
+    
+    // -- Create a new instance of the Restaurant with the default initializer
+    var newRestaurant = Restaurant()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -25,17 +36,74 @@ class AddRestaurantController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    /*
+        ----------------------------------------------------------
+                MARK: - @IBAction Methods
+        ----------------------------------------------------------
+    */
 
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 0 {
+    @IBAction func saveNewRestaurantDetails(sender: UIButton) {
+        if (nameTextField.text == nil || typeTextField.text == nil || locationTextField.text == nil || phoneTextField.text == nil) {
+            // TODO
+        } else {
+            newRestaurant.name = nameTextField.text!
+            newRestaurant.type = typeTextField.text!
+            newRestaurant.location = locationTextField.text!
+            newRestaurant.phone = phoneTextField.text!
+            
+            performSegueWithIdentifier("unwindToHomeScreen", sender: sender)
+        }
+    }
+    
+    @IBAction func isVisitedSelection(sender: UIButton) {
+        switch (sender.tag) {
+        case 1: // -- YES Button clicked
+            yesButton.backgroundColor! = COLORS.BLUE.toUIColor()
+            noButton.backgroundColor! = COLORS.DARKGREY.toUIColor()
+            newRestaurant.isVisited = true
+        case 0: // -- NO Button clicked
+            noButton.backgroundColor! = COLORS.RED.toUIColor()
+            yesButton.backgroundColor! = COLORS.DARKGREY.toUIColor()
+            newRestaurant.isVisited = false
+            let abc:(red: Int, green: Int, blue: Int) = HELPER.CONVERT.UICOLORtoRGB(UIColor(red: 0.408, green: 0.408, blue: 0.408, alpha: 1.0))
+            print(abc.red, abc.green, abc.blue)
+        default: break
+        }
+    }
+    
+    /*
+        ----------------------------------------------------------
+                MARK: - UIImagePickerConroller Protocol Methods
+        ----------------------------------------------------------
+    */
+    
+    // -- This method is called when an image is selected from the photolibrary in the UIImagePickerCOntroller
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.clipsToBounds = true
+        
+        // -- Dismisses the current ViewController ( in this case the UIImagePickerController )
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    /*
+        --------------------------------------------
+                MARK: - UITableView Protocol Methods
+        --------------------------------------------
+    */
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+       if indexPath.row == 0 {
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
                 let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
                 imagePicker.allowsEditing = false
                 imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+                self.presentViewController(imagePicker, animated: true, completion: nil)
             }
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -83,7 +151,12 @@ class AddRestaurantController: UITableViewController {
     */
 
     /*
-    // MARK: - Navigation
+
+    /*
+        --------------------------------------------
+                MARK: - Navigation
+        --------------------------------------------
+    */
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

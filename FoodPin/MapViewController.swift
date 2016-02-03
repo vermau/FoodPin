@@ -77,13 +77,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         */
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView!.pinTintColor = UIColor.orangeColor()
             annotationView!.canShowCallout = true
         }
         
         let leftImageView = UIImageView(frame: CGRectMake(0.0, 0.0, 55.0, 55.0))
         leftImageView.image = UIImage(named: restaurant.image)
         annotationView!.leftCalloutAccessoryView = leftImageView
+        annotationView!.pinTintColor = UIColor.purpleColor()
         
         return annotationView
     }

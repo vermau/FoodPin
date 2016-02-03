@@ -63,6 +63,11 @@ class ReviewViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /*
+        ----------------------------------------------------------
+                MARK: - @IBAction Methods
+        ----------------------------------------------------------
+    */
 
     @IBAction func ratingSelected (sender: UIButton) {
         switch (sender.tag) {

@@ -17,6 +17,8 @@ class Restaurant {
     var rating: String?
     var isVisited = false
     
+    init(){}
+    
     init(name: String, type: String, location: String, phone: String, image: String, rating: String?, isVisited: Bool) {
         self.name = name
         self.type = type
