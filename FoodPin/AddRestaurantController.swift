@@ -103,7 +103,7 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
 			imageView.contentMode = UIViewContentMode.ScaleAspectFill
 			imageView.clipsToBounds = true
 			
-			HELPER.AUTOLAYOUT.setFrameAutoLayoutForView(imageView, top: 10, bottom: 30, leading: 20, trailing: 50, centreViewHorizontallyAndVertically: true)
+			HELPER.AUTOLAYOUT.setFrameAutoLayoutForView(imageView, top: nil, bottom: nil, leading: nil, trailing: nil, centreViewHorizontallyAndVertically: true)
 		}
 		
         // -- Dismisses the current ViewController ( in this case the UIImagePickerController )
