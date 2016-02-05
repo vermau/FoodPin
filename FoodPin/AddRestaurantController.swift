@@ -44,7 +44,7 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+	
     // ----------------------------------------------------------------------------------------------------------------------
     // -- IBAction Methods
     
@@ -96,12 +96,16 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
     // ----------------------------------------------------------------------------------------------------------------------
     // -- UIImagePickerController Protocol Methods
     
-    // -- This method is called when an image is selected from the photolibrary in the UIImagePickerCOntroller
+    // -- This method is only called after an image is selected from the photolibrary in the UIImagePickerController
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        imageView.contentMode = UIViewContentMode.ScaleAspectFill
-        imageView.clipsToBounds = true
-        
+		if let selectedImage:UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+			imageView.image = selectedImage
+			imageView.contentMode = UIViewContentMode.ScaleAspectFill
+			imageView.clipsToBounds = true
+			
+			HELPER.AUTOLAYOUT.setFrameAutoLayoutForView(imageView, top: 10, bottom: 30, leading: 20, trailing: 50, centreViewHorizontallyAndVertically: true)
+		}
+		
         // -- Dismisses the current ViewController ( in this case the UIImagePickerController )
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -121,6 +125,7 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+	
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
