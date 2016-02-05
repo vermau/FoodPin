@@ -9,6 +9,10 @@
 import Foundation
 
 class Restaurant {
+
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- Properties
+    
     var name = ""
     var type = ""
     var location = ""
@@ -16,9 +20,11 @@ class Restaurant {
     var image = ""
     var rating: String?
     var isVisited = false
+
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- Initializers
     
     init(){}
-    
     init(name: String, type: String, location: String, phone: String, image: String, rating: String?, isVisited: Bool) {
         self.name = name
         self.type = type

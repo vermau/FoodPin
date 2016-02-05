@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        // -- Activate the Fabric and Crashlytics kit in the app
+        Fabric.with([Crashlytics.self])
+
         // --Change the Status Bar to light color for the entire application
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         

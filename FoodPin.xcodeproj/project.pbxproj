@@ -13,6 +13,8 @@
 		FF81526E1C4C420C00EC06EF /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF81526D1C4C420C00EC06EF /* Restaurant.swift */; };
 		FF96028C1C61878C00535C9C /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF96028B1C61878C00535C9C /* Types.swift */; };
 		FFB621541C5DE77A0053551D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB621531C5DE77A0053551D /* MapViewController.swift */; };
+		FFC0FC381C6340AD00EE66C2 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC0FC361C6340AD00EE66C2 /* Fabric.framework */; };
+		FFC0FC391C6340AD00EE66C2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC0FC371C6340AD00EE66C2 /* Crashlytics.framework */; };
 		FFE828061C565376003C22FF /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE828051C565376003C22FF /* ReviewViewController.swift */; };
 		FFF347721C5F7EBD00F53340 /* AddRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF347711C5F7EBD00F53340 /* AddRestaurantController.swift */; };
 		FFF645701BCFA390004A8B90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6456F1BCFA390004A8B90 /* AppDelegate.swift */; };
@@ -30,6 +32,8 @@
 		FF81526D1C4C420C00EC06EF /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		FF96028B1C61878C00535C9C /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		FFB621531C5DE77A0053551D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FFC0FC361C6340AD00EE66C2 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		FFC0FC371C6340AD00EE66C2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		FFE828051C565376003C22FF /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		FFF347711C5F7EBD00F53340 /* AddRestaurantController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRestaurantController.swift; sourceTree = "<group>"; };
 		FFF6456C1BCFA390004A8B90 /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +52,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF5AEF9A1C5CEB60002C4220 /* MapKit.framework in Frameworks */,
+				FFC0FC391C6340AD00EE66C2 /* Crashlytics.framework in Frameworks */,
+				FFC0FC381C6340AD00EE66C2 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,12 +93,21 @@
 			name = source;
 			sourceTree = "<group>";
 		};
-		FFF645631BCFA390004A8B90 = {
+		FFC0FC3A1C634ACD00EE66C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				FF5AEF991C5CEB60002C4220 /* MapKit.framework */,
+				FFC0FC361C6340AD00EE66C2 /* Fabric.framework */,
+				FFC0FC371C6340AD00EE66C2 /* Crashlytics.framework */,
+			);
+			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		FFF645631BCFA390004A8B90 = {
+			isa = PBXGroup;
+			children = (
 				FFF6456E1BCFA390004A8B90 /* FoodPin */,
-				FFF6456D1BCFA390004A8B90 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,11 +117,14 @@
 				FFF6456C1BCFA390004A8B90 /* FoodPin.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		FFF6456E1BCFA390004A8B90 /* FoodPin */ = {
 			isa = PBXGroup;
 			children = (
+				FFC0FC3A1C634ACD00EE66C2 /* Frameworks */,
+				FFF6456D1BCFA390004A8B90 /* Products */,
 				FFF645731BCFA390004A8B90 /* Main.storyboard */,
 				FFF645781BCFA390004A8B90 /* LaunchScreen.storyboard */,
 				FF5AEF981C5CEA60002C4220 /* source */,
@@ -126,6 +144,7 @@
 				FFF645681BCFA390004A8B90 /* Sources */,
 				FFF645691BCFA390004A8B90 /* Frameworks */,
 				FFF6456A1BCFA390004A8B90 /* Resources */,
+				FFC0FC351C633CBE00EE66C2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -187,6 +206,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FFC0FC351C633CBE00EE66C2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run d40630a36f77de7cf523b526b29795bf78119b2d 98e2f528c13a60661c621c392c5d3f89555d2f3a3d0f0596165f2ccff0692273";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FFF645681BCFA390004A8B90 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -244,6 +279,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -288,6 +324,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -314,9 +351,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FoodPin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.intellisoft.FoodPin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iqhired.FoodPin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -328,9 +369,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FoodPin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.intellisoft.FoodPin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iqhired.FoodPin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

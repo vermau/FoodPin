@@ -10,7 +10,16 @@ import UIKit
 
 class AddRestaurantController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var imageView : UIImageView!
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- Private Properties
+    
+    private var newRestaurant = Restaurant() // -- Default initialiser used
+    private let alertView = UIAlertController(title: "Warning", message: "All fields are mandatory", preferredStyle: .Alert) // -- Auto Dismissing UIAlertController
+
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- IBOutlet Properties
+    
+    @IBOutlet private weak var imageView : UIImageView!
     @IBOutlet private weak var nameTextField : UITextField!
     @IBOutlet private weak var typeTextField : UITextField!
     @IBOutlet private weak var phoneTextField : UITextField!
@@ -18,33 +27,40 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
     @IBOutlet private weak var noButton : UIButton!
     @IBOutlet private weak var yesButton : UIButton!
     
-    // -- Create a new instance of the Restaurant with the default initializer
-    var newRestaurant = Restaurant()
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- Standard Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-        ----------------------------------------------------------
-                MARK: - @IBAction Methods
-        ----------------------------------------------------------
-    */
-
+    
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- IBAction Methods
+    
     @IBAction func saveNewRestaurantDetails(sender: UIButton) {
-        if (nameTextField.text == nil || typeTextField.text == nil || locationTextField.text == nil || phoneTextField.text == nil) {
-            // TODO
+        if (nameTextField.text == "" || typeTextField.text == "" || locationTextField.text == "" || phoneTextField.text == "") {
+            
+            // -- Immediately present the UIAlertController as soon as the If conditon is met on pressing the Save button
+            dispatch_async(dispatch_get_main_queue(), {
+                self.presentViewController(self.alertView, animated: true, completion: nil)
+            })
+            
+            /*
+            -- NSTimer For auto dismissing the UIAlertController
+            -- It calls the "dismissAlertController func after 2 seconds of display
+            */
+            _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("dismissAlertController"), userInfo: nil, repeats: false)
         } else {
             newRestaurant.name = nameTextField.text!
             newRestaurant.type = typeTextField.text!
@@ -65,17 +81,20 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
             noButton.backgroundColor! = COLORS.RED.toUIColor()
             yesButton.backgroundColor! = COLORS.DARKGREY.toUIColor()
             newRestaurant.isVisited = false
-            let abc:(red: Int, green: Int, blue: Int) = HELPER.CONVERT.UICOLORtoRGB(UIColor(red: 0.408, green: 0.408, blue: 0.408, alpha: 1.0))
-            print(abc.red, abc.green, abc.blue)
         default: break
         }
     }
+
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- Selector Methods
     
-    /*
-        ----------------------------------------------------------
-                MARK: - UIImagePickerConroller Protocol Methods
-        ----------------------------------------------------------
-    */
+    internal func dismissAlertController() {
+        // -- Dismiss the UIAlertcontroller
+        alertView.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- UIImagePickerController Protocol Methods
     
     // -- This method is called when an image is selected from the photolibrary in the UIImagePickerCOntroller
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -87,11 +106,8 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
         dismissViewControllerAnimated(true, completion: nil)
     }
 
-    /*
-        --------------------------------------------
-                MARK: - UITableView Protocol Methods
-        --------------------------------------------
-    */
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- UITableView Protocol Methods
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        if indexPath.row == 0 {
@@ -152,11 +168,8 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
 
     /*
 
-    /*
-        --------------------------------------------
-                MARK: - Navigation
-        --------------------------------------------
-    */
+    // ----------------------------------------------------------------------------------------------------------------------
+    // -- Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
