@@ -26,10 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         // --Change the background color of the Navigation Bar for whole application
-        UINavigationBar.appearance().barTintColor = UIColor(red: 242.0/255.0, green: 116.0/255.0, blue: 119.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = COLORS.GREEN.toUIColor()
 
         // --Change the foreground color of the Navigation Bar for whole application
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().tintColor = COLORS.WHITE.toUIColor()
         
         // --Change the font of the Navigation Bar
         if let barFont = UIFont(name: "Avenir-Light", size: 24.0) {

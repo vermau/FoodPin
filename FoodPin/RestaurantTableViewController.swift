@@ -281,7 +281,7 @@ class RestaurantTableViewController: UITableViewController {
     }
     */
 
-    /*
+    /*.
                     ---------------------------------------
                         Mark: - StatusBar customization
                     ---------------------------------------
@@ -300,8 +300,14 @@ class RestaurantTableViewController: UITableViewController {
                     ---------------------------------------
     */
     
-    @IBAction func close(segue: UIStoryboardSegue) {
-        
+	@IBAction func close(segue: UIStoryboardSegue) {
+		if segue.identifier == "unwindToHomeScreen" {
+			let addRestaurantContoller = segue.sourceViewController as! AddRestaurantController
+			if addRestaurantContoller.newRestaurantSaved {
+				self.restaurants.append(addRestaurantContoller.newRestaurant)
+				self.tableView.reloadData()
+			}
+		}
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

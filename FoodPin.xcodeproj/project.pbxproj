@@ -60,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF4998641C6840F3002ED9B6 /* support files */ = {
+			isa = PBXGroup;
+			children = (
+				FFF6457B1BCFA390004A8B90 /* Info.plist */,
+			);
+			name = "support files";
+			sourceTree = "<group>";
+		};
 		FF5AEF961C5CEA25002C4220 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,8 +136,8 @@
 				FFF645731BCFA390004A8B90 /* Main.storyboard */,
 				FFF645781BCFA390004A8B90 /* LaunchScreen.storyboard */,
 				FF5AEF981C5CEA60002C4220 /* source */,
+				FF4998641C6840F3002ED9B6 /* support files */,
 				FFF645761BCFA390004A8B90 /* Assets.xcassets */,
-				FFF6457B1BCFA390004A8B90 /* Info.plist */,
 			);
 			path = FoodPin;
 			sourceTree = "<group>";

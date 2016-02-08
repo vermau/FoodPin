@@ -11,10 +11,11 @@ import UIKit
 class AddRestaurantController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // ----------------------------------------------------------------------------------------------------------------------
-    // -- Private Properties
+    // -- Private and Internal Properties
     
-    private var newRestaurant = Restaurant() // -- Default initialiser used
-    private let alertView = UIAlertController(title: "Warning", message: "All fields are mandatory", preferredStyle: .Alert) // -- Auto Dismissing UIAlertController
+	private var alertView : UIAlertController!
+	internal var newRestaurant = Restaurant() // -- Default initialiser used
+	internal var newRestaurantSaved = false
 
     // ----------------------------------------------------------------------------------------------------------------------
     // -- IBOutlet Properties
@@ -32,7 +33,9 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "New Restaurant"
+		newRestaurantSaved = false
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -50,8 +53,9 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
     
     @IBAction func saveNewRestaurantDetails(sender: UIButton) {
         if (nameTextField.text == "" || typeTextField.text == "" || locationTextField.text == "" || phoneTextField.text == "") {
-            
-            // -- Immediately present the UIAlertController as soon as the If conditon is met on pressing the Save button
+			alertView = UIAlertController(title: "Warning", message: "All fields are mandatory", preferredStyle: .Alert) // -- Auto Dismissing UIAlertController
+
+			// -- Immediately present the UIAlertController as soon as the If conditon is met on pressing the Save button
             dispatch_async(dispatch_get_main_queue(), {
                 self.presentViewController(self.alertView, animated: true, completion: nil)
             })
@@ -66,7 +70,8 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
             newRestaurant.type = typeTextField.text!
             newRestaurant.location = locationTextField.text!
             newRestaurant.phone = phoneTextField.text!
-            
+			
+			newRestaurantSaved = true
             performSegueWithIdentifier("unwindToHomeScreen", sender: sender)
         }
     }
@@ -102,6 +107,7 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
 			imageView.image = selectedImage
 			imageView.contentMode = UIViewContentMode.ScaleAspectFill
 			imageView.clipsToBounds = true
+			newRestaurant.image = ""
 			
 			HELPER.AUTOLAYOUT.setFrameAutoLayoutForView(imageView, top: nil, bottom: nil, leading: nil, trailing: nil, centreViewHorizontallyAndVertically: true)
 		}
@@ -171,16 +177,10 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
     }
     */
 
-    /*
-
     // ----------------------------------------------------------------------------------------------------------------------
     // -- Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
-
 }

@@ -451,13 +451,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="x7I-S8-lql">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oGH-RU-QKl">
+                        <barButtonItem key="leftBarButtonItem" tag="-100" systemItem="cancel" id="oGH-RU-QKl">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="bxS-0G-BHX" kind="unwind" identifier="unwindToHomeScreen" unwindAction="close:" id="CVL-q2-NzM"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Hw8-qU-Bje">
+                        <barButtonItem key="rightBarButtonItem" tag="100" systemItem="save" id="Hw8-qU-Bje">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="saveNewRestaurantDetails:" destination="COz-vT-7aH" id="4HH-Ii-3xZ"/>
