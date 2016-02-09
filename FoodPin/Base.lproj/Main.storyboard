@@ -247,8 +247,8 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="VBf-Tk-Bpp">
                                                     <rect key="frame" x="10" y="10" width="580" height="54"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zK-hV-nhQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="48" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zK-hV-nhQ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="570" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -260,6 +260,7 @@
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="1zK-hV-nhQ" secondAttribute="trailing" constant="10" id="A0f-WA-ABr"/>
                                                         <constraint firstAttribute="trailing" secondItem="SQ8-IC-SCs" secondAttribute="trailing" constant="10" id="ALc-E6-bbl"/>
                                                     </constraints>
                                                 </stackView>
@@ -283,8 +284,8 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="DBQ-Bf-KVd">
                                                     <rect key="frame" x="10" y="10" width="580" height="54"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfr-vY-MEb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfr-vY-MEb">
+                                                            <rect key="frame" x="0.0" y="0.0" width="570" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -296,6 +297,7 @@
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="Pfr-vY-MEb" secondAttribute="trailing" constant="10" id="cot-KL-foC"/>
                                                         <constraint firstAttribute="trailing" secondItem="hWB-Ix-byh" secondAttribute="trailing" constant="10" id="ew5-zN-wAZ"/>
                                                     </constraints>
                                                 </stackView>
@@ -319,8 +321,8 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Cij-od-4LD">
                                                     <rect key="frame" x="10" y="10" width="580" height="54"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Otz-0c-Yvb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="83" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Otz-0c-Yvb">
+                                                            <rect key="frame" x="0.0" y="0.0" width="570" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -333,6 +335,7 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="okA-7Y-HeY" secondAttribute="trailing" constant="10" id="dpL-eC-sy8"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Otz-0c-Yvb" secondAttribute="trailing" constant="10" id="tw1-hZ-lTX"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
@@ -356,7 +359,7 @@
                                                     <rect key="frame" x="10" y="10" width="580" height="54"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHONE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95z-oe-PPQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="58" height="21"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="570" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -368,6 +371,7 @@
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="95z-oe-PPQ" secondAttribute="trailing" constant="10" id="MUa-Vj-3Hh"/>
                                                         <constraint firstAttribute="trailing" secondItem="df7-3Y-PQU" secondAttribute="trailing" constant="10" id="yWe-LO-7cI"/>
                                                     </constraints>
                                                 </stackView>

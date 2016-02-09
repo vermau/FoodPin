@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
-class RestaurantTableViewController: UITableViewController {
+class RestaurantTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var restaurants:[Restaurant] = [
+    internal var restaurants:[Restaurant] = []
+	private var fetchResultController: NSFetchedResultsController!
         
-        Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location: "G/F, 72 Po Hing Fong, Sheung Wan, Hong Kong", phone: "232-923423", image: "cafedeadend.jpg", rating: nil, isVisited: false),
+        /*Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location: "G/F, 72 Po Hing Fong, Sheung Wan, Hong Kong", phone: "232-923423", image: "cafedeadend.jpg", rating: nil, isVisited: false),
         
         Restaurant(name: "Homei", type: "Cafe", location: "Shop B, G/F, 22-24A Tai Ping San Street SOHO, Sheung Wan, Hong Kong", phone: "348-233423", image: "homei.jpg", rating: nil, isVisited: false),
         
@@ -54,8 +56,11 @@ class RestaurantTableViewController: UITableViewController {
         
         Restaurant(name: "Thai Cafe", type: "Thai", location: "22 Charlwood Street London SW1V 2DY Pimlico", phone: "432-344050", image: "thaicafe.jpg", rating: nil, isVisited: false)
         
-        ]
+        ]*/
     
+	// ----------------------------------------------------------------------------------------------------------------------
+	// -- Standard Methods
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,6 +69,13 @@ class RestaurantTableViewController: UITableViewController {
         
         // --Remove the title of the backBarButtonItem so that it only shows "<" in the NavigationBar
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+		
+		/*
+			-- Load data into the TableView from DataStore
+			-- First time it loads all data
+			-- Subsequently it loads only changed data
+		*/
+		loadDataFromDataStore()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -96,12 +108,58 @@ class RestaurantTableViewController: UITableViewController {
         // --TODO code here that you want to execute when the View is displayed on screen
     }
 
+	private func loadDataFromDataStore() {
+		let fetchRequest = NSFetchRequest(entityName: "Restaurant")
+		let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+		fetchRequest.sortDescriptors = [sortDescriptor]
+		
+		if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+			fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+			fetchResultController.delegate = self
+			
+			do {
+				try fetchResultController.performFetch()
+				restaurants = fetchResultController.fetchedObjects as! [Restaurant]
+			} catch {
+				print(error)
+			}
+		}
+	}
 
-    /*
-                    ---------------------------------------
-                        Mark: - TableView data population
-                    ---------------------------------------
-    */
+	// ----------------------------------------------------------------------------------------------------------------------
+	// -- NSFetchedResultsControllerDelegate Protocol Methods
+	
+	func controllerWillChangeContent(controller: NSFetchedResultsController) {
+		tableView.beginUpdates()
+	}
+	
+	func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+		switch (type) {
+		case NSFetchedResultsChangeType.Insert:
+			if let indexPathForNewRecord = newIndexPath {
+				tableView.insertRowsAtIndexPaths([indexPathForNewRecord], withRowAnimation: .Fade)
+			}
+		case NSFetchedResultsChangeType.Delete:
+			if let indexPathForDeletedRecord = indexPath {
+				tableView.deleteRowsAtIndexPaths([indexPathForDeletedRecord], withRowAnimation: .Fade)
+			}
+		case NSFetchedResultsChangeType.Update:
+			if let indexPathForUpdatedRecord = indexPath {
+				tableView.reloadRowsAtIndexPaths([indexPathForUpdatedRecord], withRowAnimation: .Fade)
+			}
+		default:
+			tableView.reloadData()
+		}
+		
+		restaurants = controller.fetchedObjects as! [Restaurant]
+	}
+	
+	func controllerDidChangeContent(controller: NSFetchedResultsController) {
+		tableView.endUpdates()
+	}
+
+	// ----------------------------------------------------------------------------------------------------------------------
+	// -- UITableView Protocol Methods
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections
@@ -123,15 +181,17 @@ class RestaurantTableViewController: UITableViewController {
         cell.lblName.text = restaurants[indexPath.row].name
         cell.lblLocation.text = restaurants[indexPath.row].location
         cell.lblType.text = restaurants[indexPath.row].type
-        cell.thumbnailImageView.image = UIImage(named: restaurants[indexPath.row].image)
+        cell.thumbnailImageView.image = UIImage(data: restaurants[indexPath.row].image!)
         
         // Rounding the corners of thumbnailImageView. For a perfect circle, set the corner radius to 30 ( half of the width and height of the thumbnailImageView which is 60 )
         cell.thumbnailImageView.layer.cornerRadius = 30
         cell.thumbnailImageView.clipsToBounds = true
         
         // Set the value of accessortType property by checking the value in the array using the TERNARY OPERATOR for IF ELSE
-        cell.accessoryType = restaurants[indexPath.row].isVisited ? UITableViewCellAccessoryType.Checkmark : .None
-        
+		if let isVisited = restaurants[indexPath.row].isVisited?.boolValue {
+			cell.accessoryType = isVisited ? UITableViewCellAccessoryType.Checkmark : .None
+		}
+		
         return cell
     }
     
@@ -221,7 +281,7 @@ class RestaurantTableViewController: UITableViewController {
         // Define the SOCIAL SHARING Action
         let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Share", handler: {(action: UITableViewRowAction, indexPath: NSIndexPath) -> Void in
             let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name
-            if let restaurantImage = UIImage(named: self.restaurants[indexPath.row].image) {
+            if let restaurantImage = UIImage(data: self.restaurants[indexPath.row].image!) {
                 let activityController = UIActivityViewController(activityItems: [defaultText, restaurantImage], applicationActivities: nil)
                 
                 // -- Excluded activities from the activityController
@@ -301,13 +361,6 @@ class RestaurantTableViewController: UITableViewController {
     */
     
 	@IBAction func close(segue: UIStoryboardSegue) {
-		if segue.identifier == "unwindToHomeScreen" {
-			let addRestaurantContoller = segue.sourceViewController as! AddRestaurantController
-			if addRestaurantContoller.newRestaurantSaved {
-				self.restaurants.append(addRestaurantContoller.newRestaurant)
-				self.tableView.reloadData()
-			}
-		}
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

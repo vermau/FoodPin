@@ -7,25 +7,28 @@
 //
 
 import Foundation
+import CoreData
 
-class Restaurant {
+class Restaurant: NSManagedObject {
 
     // ----------------------------------------------------------------------------------------------------------------------
     // -- Properties
     
-    var name = ""
-    var type = ""
-    var location = ""
-    var phone = ""
-    var image = ""
-    var rating: String?
-    var isVisited = false
+	@NSManaged var name: String
+    @NSManaged var type: String
+    @NSManaged var location: String
+    @NSManaged var phone: String?
+    @NSManaged var image: NSData?
+    @NSManaged var rating: String?
+    @NSManaged var isVisited: NSNumber?
 
     // ----------------------------------------------------------------------------------------------------------------------
     // -- Initializers
     
-    init(){}
-    init(name: String, type: String, location: String, phone: String, image: String, rating: String?, isVisited: Bool) {
+    /*init(){
+		super.init()
+	}
+    init(name: String, type: String, location: String, phone: String?, image: NSData?, rating: String?, isVisited: NSNumber?) {
         self.name = name
         self.type = type
         self.location = location
@@ -33,5 +36,5 @@ class Restaurant {
         self.image = image
         self.rating = rating
         self.isVisited = isVisited
-    }
+    }*/
 }

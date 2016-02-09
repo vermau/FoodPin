@@ -7,15 +7,17 @@
 //
 
 import UIKit
-
+import CoreData
+// ----------------------------------------------------------------------------------------------------------------------
+// -- UITableView Protocol Methods
 class AddRestaurantController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // ----------------------------------------------------------------------------------------------------------------------
     // -- Private and Internal Properties
     
-	private var alertView : UIAlertController!
-	internal var newRestaurant = Restaurant() // -- Default initialiser used
-	internal var newRestaurantSaved = false
+	private var alertView: UIAlertController!
+	private var isVisited = false
+	internal var newRestaurant: Restaurant!
 
     // ----------------------------------------------------------------------------------------------------------------------
     // -- IBOutlet Properties
@@ -34,7 +36,6 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "New Restaurant"
-		newRestaurantSaved = false
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -48,12 +49,33 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
         // Dispose of any resources that can be recreated.
     }
 	
+	private func saveToDataStore() {
+		if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+			newRestaurant = NSEntityDescription.insertNewObjectForEntityForName("Restaurant", inManagedObjectContext: managedObjectContext) as! Restaurant
+			newRestaurant.name = nameTextField.text!
+			newRestaurant.type = typeTextField.text!
+			newRestaurant.location = locationTextField.text!
+			newRestaurant.phone = phoneTextField.text!
+			newRestaurant.isVisited = isVisited
+			newRestaurant.image = UIImagePNGRepresentation(imageView.image!)
+			
+			do {
+				try managedObjectContext.save()
+			}catch {
+				print(error)
+				return
+			}
+		}
+	}
+	
     // ----------------------------------------------------------------------------------------------------------------------
     // -- IBAction Methods
     
     @IBAction func saveNewRestaurantDetails(sender: UIButton) {
-        if (nameTextField.text == "" || typeTextField.text == "" || locationTextField.text == "" || phoneTextField.text == "") {
-			alertView = UIAlertController(title: "Warning", message: "All fields are mandatory", preferredStyle: .Alert) // -- Auto Dismissing UIAlertController
+		
+		// -- Data entry validation
+        if (nameTextField.text! == "" || typeTextField.text! == "" || locationTextField.text! == "") {
+			alertView = UIAlertController(title: "Warning", message: "Fields with '*' are Mandatory", preferredStyle: .Alert) // -- Auto Dismissing UIAlertController
 
 			// -- Immediately present the UIAlertController as soon as the If conditon is met on pressing the Save button
             dispatch_async(dispatch_get_main_queue(), {
@@ -66,26 +88,21 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
             */
             _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("dismissAlertController"), userInfo: nil, repeats: false)
         } else {
-            newRestaurant.name = nameTextField.text!
-            newRestaurant.type = typeTextField.text!
-            newRestaurant.location = locationTextField.text!
-            newRestaurant.phone = phoneTextField.text!
-			
-			newRestaurantSaved = true
-            performSegueWithIdentifier("unwindToHomeScreen", sender: sender)
+				saveToDataStore()
+				performSegueWithIdentifier("unwindToHomeScreen", sender: sender)
+			}
         }
-    }
-    
+	
     @IBAction func isVisitedSelection(sender: UIButton) {
         switch (sender.tag) {
         case 1: // -- YES Button clicked
             yesButton.backgroundColor! = COLORS.BLUE.toUIColor()
             noButton.backgroundColor! = COLORS.DARKGREY.toUIColor()
-            newRestaurant.isVisited = true
+            isVisited = true
         case 0: // -- NO Button clicked
             noButton.backgroundColor! = COLORS.RED.toUIColor()
             yesButton.backgroundColor! = COLORS.DARKGREY.toUIColor()
-            newRestaurant.isVisited = false
+            isVisited = false
         default: break
         }
     }
@@ -107,7 +124,6 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
 			imageView.image = selectedImage
 			imageView.contentMode = UIViewContentMode.ScaleAspectFill
 			imageView.clipsToBounds = true
-			newRestaurant.image = ""
 			
 			HELPER.AUTOLAYOUT.setFrameAutoLayoutForView(imageView, top: nil, bottom: nil, leading: nil, trailing: nil, centreViewHorizontallyAndVertically: true)
 		}

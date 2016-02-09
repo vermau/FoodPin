@@ -35,7 +35,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         ratingButton.clipsToBounds = true
 
         // --Load the image in the ImageView
-        restaurantImageView.image = UIImage(named: restaurant.image)
+        restaurantImageView.image = UIImage(data: restaurant.image!)
         
         detailTableView.estimatedRowHeight = 36.0
         detailTableView.rowHeight = UITableViewAutomaticDimension
@@ -102,7 +102,9 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
             cell.valueLabel.text = restaurant.phone
         case 4:
             cell.fieldLabel.text = "Been Here"
-            cell.valueLabel.text = (restaurant.isVisited) ? "Yes I have been here before" : "No"
+			if let isVisited = restaurant.isVisited?.boolValue {
+				cell.valueLabel.text = isVisited ? "Yes I have visited" : "No I haven't visited"
+			}
         default:
             cell.fieldLabel.text = ""
             cell.valueLabel.text = ""
