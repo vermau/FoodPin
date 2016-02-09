@@ -16,7 +16,7 @@ import UIKit
 */
 
 enum COLORS {
-    case BLACK, BLUE, DARKGREY, GREEN, PINK, RED, TOMATO, WHITE
+    case BLACK, BLUE, DARKGREY, SEAGREEN, PINK, RED, TOMATO, WHITE
     
     internal func RBGValue() -> String {
         switch self {
@@ -26,8 +26,8 @@ enum COLORS {
             return "RGB(red: 0, green: 143, blue: 255)"
         case .DARKGREY:
             return "RGB(red: 85, green: 85, blue: 85)"
-        case .GREEN:
-            return "RGB(red: 86, green: 206, blue: 27)"
+        case .SEAGREEN:
+            return "RGB(red: 3, green: 109, blue: 97)"
 		case .PINK:
 			return "RGB(red: 246, green: 135, blue: 137)"
         case .RED:
@@ -47,8 +47,8 @@ enum COLORS {
             return "#008FFF"
         case .DARKGREY:
             return "#686868"
-        case .GREEN:
-            return "#56CE1B"
+        case .SEAGREEN:
+            return "#036D61"
 		case .PINK:
 			return "#F68789"
         case .RED:
@@ -68,8 +68,8 @@ enum COLORS {
             return "Blue"
         case .DARKGREY:
             return "DarkGrey"
-        case .GREEN:
-            return "Green"
+        case .SEAGREEN:
+            return "SeaGreen"
 		case .PINK:
 			return "Pink"
         case .RED:
@@ -89,8 +89,8 @@ enum COLORS {
             return UIColor(red:0.0,  green:0.463,  blue:1.0, alpha:1.0)
         case .DARKGREY:
             return UIColor(red: 0.408, green: 0.408, blue: 0.408, alpha: 1.0)
-        case .GREEN:
-            return UIColor(red: 0.314, green: 0.816, blue: 0.0, alpha: 1.0)
+        case .SEAGREEN:
+            return UIColor(red: 0.012, green: 0.427, blue: 0.380, alpha: 1.0)
 		case .PINK:
 			return UIColor(red: 0.949, green: 0.454, blue: 0.466, alpha: 1.0)
         case .RED:

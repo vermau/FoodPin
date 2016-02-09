@@ -629,10 +629,10 @@
             </objects>
             <point key="canvasLocation" x="2531" y="-762"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Qhired Navigation Controller-->
         <scene sceneID="2B7-Qi-1iU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sKU-MJ-Ody" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sKU-MJ-Ody" customClass="IQhiredNavigationController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wRU-tu-G2n">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -647,10 +647,10 @@
             </objects>
             <point key="canvasLocation" x="391" y="-47"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Qhired Navigation Controller-->
         <scene sceneID="a0w-4b-fY5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Skk-tK-0jk" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Skk-tK-0jk" customClass="IQhiredNavigationController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NUm-sx-sMo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

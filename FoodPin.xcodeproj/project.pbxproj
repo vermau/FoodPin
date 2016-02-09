@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF3E4C7C1C69EC8B00ED6943 /* IQhiredNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E4C7B1C69EC8B00ED6943 /* IQhiredNavigationController.swift */; };
+		FF3E4C7E1C69F25B00ED6943 /* IQhiredGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3E4C7D1C69F25B00ED6943 /* IQhiredGradientLayer.swift */; };
 		FF4998891C68478F002ED9B6 /* Foodpin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF4998871C68478F002ED9B6 /* Foodpin.xcdatamodeld */; };
 		FF5AEF9A1C5CEB60002C4220 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5AEF991C5CEB60002C4220 /* MapKit.framework */; };
 		FF66835E1C472175003BC35A /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66835D1C472175003BC35A /* RestaurantDetailViewController.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF3E4C7B1C69EC8B00ED6943 /* IQhiredNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQhiredNavigationController.swift; sourceTree = "<group>"; };
+		FF3E4C7D1C69F25B00ED6943 /* IQhiredGradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQhiredGradientLayer.swift; sourceTree = "<group>"; };
 		FF4998881C68478F002ED9B6 /* Foodpin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Foodpin.xcdatamodel; sourceTree = "<group>"; };
 		FF5AEF991C5CEB60002C4220 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FF66835D1C472175003BC35A /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 				FFE828051C565376003C22FF /* ReviewViewController.swift */,
 				FFF645811BCFA563004A8B90 /* RestaurantTableViewController.swift */,
 				FF66835D1C472175003BC35A /* RestaurantDetailViewController.swift */,
+				FF3E4C7B1C69EC8B00ED6943 /* IQhiredNavigationController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -105,6 +110,7 @@
 				FF96028B1C61878C00535C9C /* Types.swift */,
 				FFF6456F1BCFA390004A8B90 /* AppDelegate.swift */,
 				FF81526D1C4C420C00EC06EF /* Restaurant.swift */,
+				FF3E4C7D1C69F25B00ED6943 /* IQhiredGradientLayer.swift */,
 				FF5AEF961C5CEA25002C4220 /* View Controllers */,
 				FF5AEF971C5CEA4D002C4220 /* Custom Cells */,
 			);
@@ -250,12 +256,14 @@
 				FF4998891C68478F002ED9B6 /* Foodpin.xcdatamodeld in Sources */,
 				FF81526E1C4C420C00EC06EF /* Restaurant.swift in Sources */,
 				FFF645821BCFA563004A8B90 /* RestaurantTableViewController.swift in Sources */,
+				FF3E4C7E1C69F25B00ED6943 /* IQhiredGradientLayer.swift in Sources */,
 				FF96028C1C61878C00535C9C /* Types.swift in Sources */,
 				FFE828061C565376003C22FF /* ReviewViewController.swift in Sources */,
 				FFF645841BCFF555004A8B90 /* RestaurantTableViewCell.swift in Sources */,
 				FF76795E1C4DC14E00737FFB /* RestaurantDetailTableViewCell.swift in Sources */,
 				FF66835E1C472175003BC35A /* RestaurantDetailViewController.swift in Sources */,
 				FFF645701BCFA390004A8B90 /* AppDelegate.swift in Sources */,
+				FF3E4C7C1C69EC8B00ED6943 /* IQhiredNavigationController.swift in Sources */,
 				FFB621541C5DE77A0053551D /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

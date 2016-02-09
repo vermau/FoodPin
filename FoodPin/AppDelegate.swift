@@ -27,15 +27,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         // --Change the background color of the Navigation Bar for whole application
-        UINavigationBar.appearance().barTintColor = COLORS.GREEN.toUIColor()
+        //UINavigationBar.appearance().barTintColor = COLORS.SEAGREEN.toUIColor()
 
         // --Change the foreground color of the Navigation Bar for whole application
-        UINavigationBar.appearance().tintColor = COLORS.WHITE.toUIColor()
+        //UINavigationBar.appearance().tintColor = COLORS.WHITE.toUIColor()
         
         // --Change the font of the Navigation Bar
-        if let barFont = UIFont(name: "Avenir-Light", size: 24.0) {
-            UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: barFont]
-        }
+        /*if let barFont = UIFont(name: "Avenir-Light", size: 24.0) {
+            UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: COLORS.BLACK.toUIColor(), NSFontAttributeName: barFont]
+			//UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: barFont]
+        }*/
 
         return true
     }
