@@ -10,8 +10,7 @@ import UIKit
 import CoreData
 
 class RestaurantTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    
-    internal var restaurants:[Restaurant] = []
+    private var modelController = ModelController()
 	private var fetchResultController: NSFetchedResultsController!
         
         /*Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location: "G/F, 72 Po Hing Fong, Sheung Wan, Hong Kong", phone: "232-923423", image: "cafedeadend.jpg", rating: nil, isVisited: false),
@@ -119,7 +118,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 			
 			do {
 				try fetchResultController.performFetch()
-				restaurants = fetchResultController.fetchedObjects as! [Restaurant]
+				modelController.restaurants = fetchResultController.fetchedObjects as! [Restaurant]
 			} catch {
 				print(error)
 			}
@@ -151,7 +150,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 			tableView.reloadData()
 		}
 		
-		restaurants = controller.fetchedObjects as! [Restaurant]
+		modelController.restaurants = controller.fetchedObjects as! [Restaurant]
 	}
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
@@ -168,7 +167,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows
-        return restaurants.count
+        return modelController.restaurants.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -178,17 +177,17 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! RestaurantTableViewCell
 
         // Configure the cell...
-        cell.lblName.text = restaurants[indexPath.row].name
-        cell.lblLocation.text = restaurants[indexPath.row].location
-        cell.lblType.text = restaurants[indexPath.row].type
-        cell.thumbnailImageView.image = UIImage(data: restaurants[indexPath.row].image!)
+        cell.lblName.text = modelController.restaurants[indexPath.row].name
+        cell.lblLocation.text = modelController.restaurants[indexPath.row].location
+        cell.lblType.text = modelController.restaurants[indexPath.row].type
+        cell.thumbnailImageView.image = UIImage(data: modelController.restaurants[indexPath.row].image!)
         
         // Rounding the corners of thumbnailImageView. For a perfect circle, set the corner radius to 30 ( half of the width and height of the thumbnailImageView which is 60 )
         cell.thumbnailImageView.layer.cornerRadius = 30
         cell.thumbnailImageView.clipsToBounds = true
         
         // Set the value of accessortType property by checking the value in the array using the TERNARY OPERATOR for IF ELSE
-		if let isVisited = restaurants[indexPath.row].isVisited?.boolValue {
+		if let isVisited = modelController.restaurants[indexPath.row].isVisited?.boolValue {
 			cell.accessoryType = isVisited ? UITableViewCellAccessoryType.Checkmark : .None
 		}
 		
@@ -257,7 +256,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         // Define the DELETE Action
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler: {(action, indexPath) -> Void in
             // Delete the corresponding row from the Data Source Array
-            self.restaurants.removeAtIndex(indexPath.row)
+            self.modelController.restaurants.removeAtIndex(indexPath.row)
             
             /*  -- Delete the row from the UITableView
             -- The deleteRowsAtIndexPaths method takes in two parameters:
@@ -280,8 +279,8 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 
         // Define the SOCIAL SHARING Action
         let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Share", handler: {(action: UITableViewRowAction, indexPath: NSIndexPath) -> Void in
-            let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name
-            if let restaurantImage = UIImage(data: self.restaurants[indexPath.row].image!) {
+            let defaultText = "Just checking in at " + self.modelController.restaurants[indexPath.row].name
+            if let restaurantImage = UIImage(data: self.modelController.restaurants[indexPath.row].image!) {
                 let activityController = UIActivityViewController(activityItems: [defaultText, restaurantImage], applicationActivities: nil)
                 
                 // -- Excluded activities from the activityController
@@ -311,7 +310,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         if editingStyle == .Delete {
             
             // Delete the corresponding row from the Data Source Array
-            restaurants.removeAtIndex(indexPath.row)
+            modelController.restaurants.removeAtIndex(indexPath.row)
             
             /*  -- Delete the row from the UITableView
                 -- The deleteRowsAtIndexPaths method takes in two parameters: 
@@ -324,22 +323,6 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*.
                     ---------------------------------------
@@ -366,11 +349,10 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "restaurantDetail" {
-            
             // -- If the user selects a row before clicking the back button in TableView, we will retrieve the indexPath of the row in a variable
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let destinationViewController = segue.destinationViewController as! RestaurantDetailViewController
-                destinationViewController.restaurant = restaurants[indexPath.row]
+            if let destinationViewController = segue.destinationViewController as? RestaurantDetailViewController, let indexPath = self.tableView.indexPathForSelectedRow {
+                modelController.selectedRestaurant = modelController.restaurants[indexPath.row]
+                destinationViewController.modelController = self.modelController
             }
         }
     }

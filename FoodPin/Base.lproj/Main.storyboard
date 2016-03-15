@@ -154,10 +154,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="zpH-ip-jIo" id="boV-ih-hbZ"/>
-                                    <outlet property="delegate" destination="zpH-ip-jIo" id="Xee-vF-g2H"/>
-                                </connections>
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgf-Nk-GqO">
                                 <rect key="frame" x="555" y="72" width="40" height="40"/>

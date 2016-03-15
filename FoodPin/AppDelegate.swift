@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import Fabric
 import CoreData
-import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // -- Activate the Fabric and Crashlytics kit in the app
-        Fabric.with([Crashlytics.self])
+        //Fabric.with([Crashlytics.self])
 
         // --Change the Status Bar to light color for the entire application
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
@@ -126,7 +124,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

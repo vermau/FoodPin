@@ -14,6 +14,8 @@
 		FF66835E1C472175003BC35A /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66835D1C472175003BC35A /* RestaurantDetailViewController.swift */; };
 		FF76795E1C4DC14E00737FFB /* RestaurantDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76795D1C4DC14E00737FFB /* RestaurantDetailTableViewCell.swift */; };
 		FF81526E1C4C420C00EC06EF /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF81526D1C4C420C00EC06EF /* Restaurant.swift */; };
+		FF8A58F01C96A6250016B5B2 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A58EF1C96A6250016B5B2 /* StateController.swift */; };
+		FF8A58F21C96B1B50016B5B2 /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A58F11C96B1B50016B5B2 /* ModelController.swift */; };
 		FF96028C1C61878C00535C9C /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF96028B1C61878C00535C9C /* Types.swift */; };
 		FFB621541C5DE77A0053551D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB621531C5DE77A0053551D /* MapViewController.swift */; };
 		FFC0FC381C6340AD00EE66C2 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC0FC361C6340AD00EE66C2 /* Fabric.framework */; };
@@ -36,6 +38,8 @@
 		FF66835D1C472175003BC35A /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		FF76795D1C4DC14E00737FFB /* RestaurantDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTableViewCell.swift; sourceTree = "<group>"; };
 		FF81526D1C4C420C00EC06EF /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		FF8A58EF1C96A6250016B5B2 /* StateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StateController.swift; path = Controllers/StateController.swift; sourceTree = "<group>"; };
+		FF8A58F11C96B1B50016B5B2 /* ModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelController.swift; path = Controllers/ModelController.swift; sourceTree = "<group>"; };
 		FF96028B1C61878C00535C9C /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		FFB621531C5DE77A0053551D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FFC0FC361C6340AD00EE66C2 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -117,6 +121,15 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		FF8A58EE1C96A4AF0016B5B2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FF8A58EF1C96A6250016B5B2 /* StateController.swift */,
+				FF8A58F11C96B1B50016B5B2 /* ModelController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		FFC0FC3A1C634ACD00EE66C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +160,7 @@
 		FFF6456E1BCFA390004A8B90 /* FoodPin */ = {
 			isa = PBXGroup;
 			children = (
+				FF8A58EE1C96A4AF0016B5B2 /* Controllers */,
 				FF4998861C684735002ED9B6 /* Database */,
 				FFC0FC3A1C634ACD00EE66C2 /* Frameworks */,
 				FFF6456D1BCFA390004A8B90 /* Products */,
@@ -258,6 +272,7 @@
 				FFF645821BCFA563004A8B90 /* RestaurantTableViewController.swift in Sources */,
 				FF3E4C7E1C69F25B00ED6943 /* IQhiredGradientLayer.swift in Sources */,
 				FF96028C1C61878C00535C9C /* Types.swift in Sources */,
+				FF8A58F21C96B1B50016B5B2 /* ModelController.swift in Sources */,
 				FFE828061C565376003C22FF /* ReviewViewController.swift in Sources */,
 				FFF645841BCFF555004A8B90 /* RestaurantTableViewCell.swift in Sources */,
 				FF76795E1C4DC14E00737FFB /* RestaurantDetailTableViewCell.swift in Sources */,
@@ -265,6 +280,7 @@
 				FFF645701BCFA390004A8B90 /* AppDelegate.swift in Sources */,
 				FF3E4C7C1C69EC8B00ED6943 /* IQhiredNavigationController.swift in Sources */,
 				FFB621541C5DE77A0053551D /* MapViewController.swift in Sources */,
+				FF8A58F01C96A6250016B5B2 /* StateController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

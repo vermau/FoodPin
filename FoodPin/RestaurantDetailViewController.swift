@@ -8,46 +8,47 @@
 
 import UIKit
 
-class RestaurantDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RestaurantDetailViewController: StateController {
     
     @IBOutlet weak var restaurantImageView : UIImageView!
     @IBOutlet weak var detailTableView : UITableView!
     @IBOutlet weak var ratingButton : UIButton!
     @IBOutlet weak var mapButton : UIButton!
     
-    var restaurant: Restaurant!
+    private var restaurantDetailsDataSource: RestaurantDetailsDataSource!
     
+    private func setupTableViewAppearance() {
+        title = modelController.selectedRestaurant.name
+        detailTableView.estimatedRowHeight = 36.0
+        detailTableView.rowHeight = UITableViewAutomaticDimension
+        
+        // --Change the background color of the DetailTableView
+        detailTableView.backgroundColor = UIColor(red: 242.0/255.0, green: 241.0/255.0, blue: 239.0/255.0, alpha: 1.0)
+        
+        // --Change the seperator color of the DetailTableView
+        detailTableView.separatorColor = UIColor(red: 218.0/255.0, green: 223.0/255.0, blue: 225.0/255.0, alpha: 1.0)
+        
+        // --Remove the seperators of the empty rows
+        detailTableView.tableFooterView = UIView(frame: CGRectZero)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableViewAppearance()
 
-        // --Set the title of the DetailTableViewController
-        title = restaurant.name
-        
         /*
         -- Using Nil Coalescing Operator here
         -- ?? will return the value of restaurant.rating if it is not nil
         -- otherwise it will return "rating"
         */
-        ratingButton.setImage(UIImage(named: restaurant.rating ?? "rating"), forState: UIControlState.Normal)
+        ratingButton.setImage(UIImage(named: modelController.selectedRestaurant.rating ?? "rating"), forState: UIControlState.Normal)
 
         // --Make the rating button round
         ratingButton.layer.cornerRadius = 20 // --'cuz the Width and Height of the button is 40
         ratingButton.clipsToBounds = true
 
         // --Load the image in the ImageView
-        restaurantImageView.image = UIImage(data: restaurant.image!)
-        
-        detailTableView.estimatedRowHeight = 36.0
-        detailTableView.rowHeight = UITableViewAutomaticDimension
-        
-        // --Change the background color of the DetailTableView
-        detailTableView.backgroundColor = UIColor(red: 242.0/255.0, green: 241.0/255.0, blue: 239.0/255.0, alpha: 1.0)
-
-        // --Change the seperator color of the DetailTableView
-        detailTableView.separatorColor = UIColor(red: 218.0/255.0, green: 223.0/255.0, blue: 225.0/255.0, alpha: 1.0)
-
-        // --Remove the seperators of the empty rows
-        detailTableView.tableFooterView = UIView(frame: CGRectZero)
+        restaurantImageView.image = UIImage(data: modelController.selectedRestaurant.image!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,6 +58,8 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        restaurantDetailsDataSource = RestaurantDetailsDataSource(restaurant: modelController.selectedRestaurant)
+        detailTableView.dataSource = restaurantDetailsDataSource
         
         /*
             -- If the NavigationBar is set to hide on scroll down in the Main ViewController
@@ -68,57 +71,6 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-
-    /*
-                    ---------------------------------------
-                        Mark: - TableView data population
-                    ---------------------------------------
-    */
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! RestaurantDetailTableViewCell
-        
-        // --Makes the background of the cell filled with content as transparent background
-        // --so that the background color of the DetailTableView can be seen
-        cell.backgroundColor = UIColor.clearColor()
-        
-        // --Configure the custom cell with required values
-        switch indexPath.row {
-        case 0:
-            cell.fieldLabel.text = "Name"
-            cell.valueLabel.text = restaurant.name
-        case 1:
-            cell.fieldLabel.text = "Type"
-            cell.valueLabel.text = restaurant.type
-        case 2:
-            cell.fieldLabel.text = "Location"
-            cell.valueLabel.text = restaurant.location
-        case 3:
-            cell.fieldLabel.text = "Phone"
-            cell.valueLabel.text = restaurant.phone
-        case 4:
-            cell.fieldLabel.text = "Been Here"
-			if let isVisited = restaurant.isVisited?.boolValue {
-				cell.valueLabel.text = isVisited ? "Yes I have visited" : "No I haven't visited"
-			}
-        default:
-            cell.fieldLabel.text = ""
-            cell.valueLabel.text = ""
-        }
-        
-        return cell
-    }
-
-
-    /*
-                    ---------------------------------------
-                        Mark: - StatusBar customization
-                    ---------------------------------------
-    */
     override func prefersStatusBarHidden() -> Bool {
         return false
     }
@@ -127,31 +79,59 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         return UIStatusBarStyle.Default
     }*/
     
-    /*
-                    ---------------------------------------
-                        MARK: - Navigation
-                    ---------------------------------------
-    */
-
     @IBAction func close(segue: UIStoryboardSegue) {
-        // -- Write code for additional logic
-        // -- that runs upon executing UnwindSegue
-        // -- from the ReviewContoller
-        
+        // -- Write code for additional logic that runs upon executing UnwindSegue from the ReviewContoller
         let reviewViewController = segue.sourceViewController as! ReviewViewController
         if let newRating = reviewViewController.rating {
             ratingButton.setImage(UIImage(named: newRating), forState: UIControlState.Normal)
-            restaurant.rating = newRating
+            modelController.selectedRestaurant.rating = newRating
         }
     }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "showMap" {
+        super.prepareForSegue(segue, sender: sender)
+        /*if segue.identifier == "showMap" {
             let destinationViewController = segue.destinationViewController as! MapViewController
-            destinationViewController.restaurant = restaurant
+            //destinationViewController.model = restaurant
+        }*/
+    }
+
+    class RestaurantDetailsDataSource: NSObject, UITableViewDataSource {
+        private var restaurant: Restaurant!
+        
+        init(restaurant: Restaurant) {
+            self.restaurant = restaurant
+        }
+        
+        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 5
+        }
+        
+        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! RestaurantDetailTableViewCell
+            
+            // --Makes the background of the cell filled with content as transparent background
+            // --so that the background color of the DetailTableView can be seen
+            cell.backgroundColor = UIColor.clearColor()
+            
+            // --Configure the custom cell with required values
+            switch indexPath.row {
+            case 0:
+                cell.name = restaurant.name
+            case 1:
+                cell.type = restaurant.type
+            case 2:
+                cell.location = restaurant.location
+            case 3:
+                cell.phone = restaurant.phone
+            case 4:
+                if let hasBeenVisited = restaurant.isVisited?.boolValue {
+                    cell.hasBeenVisited = hasBeenVisited
+                }
+            default:
+                break
+            }
+            return cell
         }
     }
 }
