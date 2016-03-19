@@ -16,7 +16,7 @@ class MapViewController: StateController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        restaurant = modelController.selectedRestaurant
         // -- Configure mapView to show traffic, scale and compass
         mapView.showsTraffic = true
         mapView.showsScale = true

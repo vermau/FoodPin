@@ -11,7 +11,11 @@ import CoreData
 
 class ModelController {
     internal var selectedRestaurant: Restaurant!
-    internal var restaurants:[Restaurant] = []
+    internal var restaurants: [Restaurant]!
+    
+    init() {
+        restaurants = []
+    }
     
     // ----------------------------------------------------------------------------------------------------------------------
     // -- CORE DATA Stack

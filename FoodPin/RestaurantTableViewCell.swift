@@ -26,4 +26,21 @@ class RestaurantTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    internal var name: String? {
+        didSet {
+            lblName.text = (name != nil ? name : nil)
+        }
+    }
+
+    internal var location: String? {
+        didSet {
+            lblLocation.text = (location != nil ? location : nil)
+        }
+    }
+
+    internal var type: String? {
+        didSet {
+            lblType.text = (type != nil ? type : nil)
+        }
+    }
 }

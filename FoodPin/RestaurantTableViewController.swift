@@ -9,78 +9,41 @@
 import UIKit
 import CoreData
 
-class RestaurantTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    private var modelController = ModelController()
+class RestaurantTableViewController: StateController, NSFetchedResultsControllerDelegate {
+    @IBOutlet weak var restaurantListTableView: UITableView!
+
 	private var fetchResultController: NSFetchedResultsController!
-        
-        /*Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location: "G/F, 72 Po Hing Fong, Sheung Wan, Hong Kong", phone: "232-923423", image: "cafedeadend.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Homei", type: "Cafe", location: "Shop B, G/F, 22-24A Tai Ping San Street SOHO, Sheung Wan, Hong Kong", phone: "348-233423", image: "homei.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Teakha", type: "Tea House", location: "Shop B, 18 Tai Ping Shan Road SOHO, Sheung Wan, Hong Kong", phone: "354-243523", image: "teakha.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Cafe loisl", type: "Austrian / Causual Drink", location: "Shop B, 20 Tai Ping Shan Road SOHO, Sheung Wan, Hong Kong", phone: "453- 333423", image: "cafeloisl.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Petite Oyster", type: "French", location: "24 Tai Ping Shan Road SOHO, Sheung Wan, Hong Kong", phone: "983-284334", image: "petiteoyster.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "For Kee Restaurant", type: "Bakery", location: "Shop J, 200 Hollywood Road, SOHO, Sheung Wan, Hong Kong", phone: "232- 434222", image: "forkeerestaurant.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Po's Atelier", type: "Bakery", location: "G/F, 62 Po Hing Fong, Sheung Wan, Hong Kong", phone: "234-834322", image: "posatelier.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Bourke Street Backery", type: "Chocolate", location: "633 Bourke St Sydney New South Wales 2010 Surry Hills", phone: "982-434343", image: "bourkestreetbakery.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Haigh's Chocolate", type: "Cafe", location: "412-414 George St Sydney New South Wales", phone: "734-232323", image: "haighschocolate.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Palomino Espresso", type: "American / Seafood", location: "Shop 1 61 York St Sydney New South Wales", phone: "872-734343", image: "palominoespresso.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Upstate", type: "American", location: "95 1st Ave New York, NY 10003", phone: "343-233221", image: "upstate.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Traif", type: "American", location: "229 S 4th St Brooklyn, NY 11211", phone: "985-723623", image: "traif.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Graham Avenue Meats", type: "Breakfast & Brunch", location: "445 Graham Ave Brooklyn, NY 11211", phone: "455-232345", image: "grahamavenuemeats.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Waffle & Wolf", type: "Coffee & Tea", location: "413 Graham Ave Brooklyn, NY 11211", phone: "434-232322", image: "wafflewolf.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Five Leaves", type: "Coffee & Tea", location: "18 Bedford Ave Brooklyn, NY 11222", phone: "343-234553", image: "fiveleaves.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Cafe Lore", type: "Latin American", location: "Sunset Park 4601 4th Ave Brooklyn, NY 11220", phone: "342-455433", image: "cafelore.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Confessional", type: "Spanish", location: "308 E 6th St New York, NY 10003", phone: "643-332323", image: "confessional.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Barrafina", type: "Spanish", location: "54 Frith Street London W1D 4SL United Kingdom", phone: "542-343434", image: "barrafina.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Donostia", type: "Spanish", location: "10 Seymour Place London W1H 7ND United Kingdom", phone: "722-232323", image: "donostia.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Royal Oak", type: "British", location: "2 Regency Street London SW1P 4BZ United Kingdom", phone: "343-988834", image: "royaloak.jpg", rating: nil, isVisited: false),
-        
-        Restaurant(name: "Thai Cafe", type: "Thai", location: "22 Charlwood Street London SW1V 2DY Pimlico", phone: "432-344050", image: "thaicafe.jpg", rating: nil, isVisited: false)
-        
-        ]*/
+    private var restaurantListDataSource: RestaurantListDataSource!
     
-	// ----------------------------------------------------------------------------------------------------------------------
-	// -- Standard Methods
-	
+    private func loadDataFromDatabase() {
+        let fetchRequest = NSFetchRequest(entityName: "Restaurant")
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let managedObjectContext = modelController?.managedObjectContext {
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+            
+            do {
+                try fetchResultController.performFetch()
+                modelController.restaurants = fetchResultController.fetchedObjects as! [Restaurant]
+            } catch {
+                print(error)
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // --Set the title of the RestaurantTableViewController
         title = "Food Pin"
         
+        //	-- Load data into the TableView from Database. First time it loads all data. Subsequently it loads only changed data
+        self.loadDataFromDatabase()
+        restaurantListDataSource = RestaurantListDataSource(restaurants: modelController.restaurants)
+        restaurantListTableView.dataSource = restaurantListDataSource
+        restaurantListTableView.delegate = restaurantListDataSource
         // --Remove the title of the backBarButtonItem so that it only shows "<" in the NavigationBar
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
-		
-		/*
-			-- Load data into the TableView from DataStore
-			-- First time it loads all data
-			-- Subsequently it loads only changed data
-		*/
-		loadDataFromDataStore()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,78 +57,47 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     */
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        //restaurantListTableView.reloadData()
         // --Hide the NavigationBar when the user scrolls down
         navigationController?.hidesBarsOnSwipe = true
     }
-
-    /*
-        --This method responds to View Events everytime
-        --Everytime the ViewController is DISPLAYED-ON-SCREEN, this method will be executed
-    */
-    override func viewDidAppear(animated: Bool) {
-        // --TODO code here that you want to execute when the View is displayed on screen
-    }
-
-	private func loadDataFromDataStore() {
-		let fetchRequest = NSFetchRequest(entityName: "Restaurant")
-		let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-		fetchRequest.sortDescriptors = [sortDescriptor]
-		
-		if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
-			fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-			fetchResultController.delegate = self
-			
-			do {
-				try fetchResultController.performFetch()
-				modelController.restaurants = fetchResultController.fetchedObjects as! [Restaurant]
-			} catch {
-				print(error)
-			}
-		}
-	}
 
 	// ----------------------------------------------------------------------------------------------------------------------
 	// -- NSFetchedResultsControllerDelegate Protocol Methods
 	
 	func controllerWillChangeContent(controller: NSFetchedResultsController) {
-		tableView.beginUpdates()
+		restaurantListTableView.beginUpdates()
 	}
 	
 	func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
 		switch (type) {
 		case NSFetchedResultsChangeType.Insert:
 			if let indexPathForNewRecord = newIndexPath {
-				tableView.insertRowsAtIndexPaths([indexPathForNewRecord], withRowAnimation: .Fade)
+				restaurantListTableView.insertRowsAtIndexPaths([indexPathForNewRecord], withRowAnimation: .Fade)
 			}
 		case NSFetchedResultsChangeType.Delete:
 			if let indexPathForDeletedRecord = indexPath {
-				tableView.deleteRowsAtIndexPaths([indexPathForDeletedRecord], withRowAnimation: .Fade)
+				restaurantListTableView.deleteRowsAtIndexPaths([indexPathForDeletedRecord], withRowAnimation: .Fade)
 			}
 		case NSFetchedResultsChangeType.Update:
 			if let indexPathForUpdatedRecord = indexPath {
-				tableView.reloadRowsAtIndexPaths([indexPathForUpdatedRecord], withRowAnimation: .Fade)
+				restaurantListTableView.reloadRowsAtIndexPaths([indexPathForUpdatedRecord], withRowAnimation: .Fade)
 			}
 		default:
-			tableView.reloadData()
+			restaurantListTableView.reloadData()
 		}
 		
 		modelController.restaurants = controller.fetchedObjects as! [Restaurant]
 	}
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
-		tableView.endUpdates()
+		restaurantListTableView.endUpdates()
 	}
 
 	// ----------------------------------------------------------------------------------------------------------------------
 	// -- UITableView Protocol Methods
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // Return the number of sections
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+/*    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows
         return modelController.restaurants.count
     }
@@ -192,7 +124,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 		}
 		
         return cell
-    }
+    }*/
     
     /*
         -- This method is called when a row is selected in the Table
@@ -252,7 +184,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     }*/
     
     // Override to create CUSTOM SWIPE ACTIONS for the selected row in the table view
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    /*override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         // Define the DELETE Action
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler: {(action, indexPath) -> Void in
             // Delete the corresponding row from the Data Source Array
@@ -303,10 +235,10 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 
         // Return an array of UITableViewRowAction objects in order to create CUSTOM ACTION BUTTONS for SWIPE on the row
         return [deleteAction, shareAction]
-    }
+    }*/
     
     // Override to support editing the table view -- Row Deletion and Insertion.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    /*override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             
             // Delete the corresponding row from the Data Source Array
@@ -322,7 +254,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
-    }
+    }*/
 
     /*.
                     ---------------------------------------
@@ -348,12 +280,46 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
         if segue.identifier == "restaurantDetail" {
-            // -- If the user selects a row before clicking the back button in TableView, we will retrieve the indexPath of the row in a variable
-            if let destinationViewController = segue.destinationViewController as? RestaurantDetailViewController, let indexPath = self.tableView.indexPathForSelectedRow {
+            if let _ = segue.destinationViewController as? RestaurantDetailViewController, let indexPath = restaurantListTableView.indexPathForSelectedRow {
                 modelController.selectedRestaurant = modelController.restaurants[indexPath.row]
-                destinationViewController.modelController = self.modelController
             }
+        }
+    }
+    
+    class RestaurantListDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+        private let restaurants: [Restaurant]!
+        
+        init(restaurants: [Restaurant]) {
+            self.restaurants = restaurants
+        }
+        
+        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+            return 1
+        }
+
+        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            print(restaurants.count)
+            return restaurants.count
+        }
+        
+        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! RestaurantTableViewCell
+            let restaurant = restaurantAtIndexPath(indexPath)
+            
+            cell.backgroundColor = UIColor.clearColor()
+            
+            // --Configure the custom cell with required values
+            cell.name = restaurant.name
+            cell.type = restaurant.type
+            cell.location = restaurant.location
+            
+            return cell
+        }
+        
+        private func restaurantAtIndexPath(indexPath: NSIndexPath) -> Restaurant {
+            return restaurants[indexPath.row]
         }
     }
 }

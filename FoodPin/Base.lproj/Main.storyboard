@@ -74,10 +74,6 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Xm4-iF-4Y8" id="YkC-sD-zaW"/>
-                            <outlet property="delegate" destination="Xm4-iF-4Y8" id="lo4-N5-06H"/>
-                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="OTw-EF-Mn1">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="LQN-yc-phU">
@@ -87,6 +83,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="restaurantListTableView" destination="miA-Ps-l38" id="elB-gF-qLh"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F1D-YQ-5YQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

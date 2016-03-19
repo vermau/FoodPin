@@ -34,8 +34,9 @@ class RestaurantDetailViewController: StateController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableViewAppearance()
-
+        self.setupTableViewAppearance()
+        restaurantDetailsDataSource = RestaurantDetailsDataSource(restaurant: modelController.selectedRestaurant)
+        detailTableView.dataSource = restaurantDetailsDataSource
         /*
         -- Using Nil Coalescing Operator here
         -- ?? will return the value of restaurant.rating if it is not nil
@@ -58,8 +59,6 @@ class RestaurantDetailViewController: StateController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        restaurantDetailsDataSource = RestaurantDetailsDataSource(restaurant: modelController.selectedRestaurant)
-        detailTableView.dataSource = restaurantDetailsDataSource
         
         /*
             -- If the NavigationBar is set to hide on scroll down in the Main ViewController
@@ -89,11 +88,11 @@ class RestaurantDetailViewController: StateController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
-        /*if segue.identifier == "showMap" {
-            let destinationViewController = segue.destinationViewController as! MapViewController
+        if segue.identifier == "showMap" {
+            super.prepareForSegue(segue, sender: sender)
+            //let destinationViewController = segue.destinationViewController as! MapViewController
             //destinationViewController.model = restaurant
-        }*/
+        }
     }
 
     class RestaurantDetailsDataSource: NSObject, UITableViewDataSource {
