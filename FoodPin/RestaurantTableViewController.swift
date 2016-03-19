@@ -300,7 +300,6 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
         }
 
         func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            print(restaurants.count)
             return restaurants.count
         }
         
