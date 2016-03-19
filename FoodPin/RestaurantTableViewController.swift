@@ -313,6 +313,7 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
             cell.name = restaurant.name
             cell.type = restaurant.type
             cell.location = restaurant.location
+            cell.restaurantImage = "restaurant"
             
             return cell
         }

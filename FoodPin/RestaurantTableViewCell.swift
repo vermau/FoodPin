@@ -10,10 +10,10 @@ import UIKit
 
 class RestaurantTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var lblName: UILabel!
-    @IBOutlet weak var lblLocation: UILabel!
-    @IBOutlet weak var lblType: UILabel!
+    @IBOutlet private weak var thumbnailImageView: UIImageView!
+    @IBOutlet private weak var lblName: UILabel!
+    @IBOutlet private weak var lblLocation: UILabel!
+    @IBOutlet private weak var lblType: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,6 +41,12 @@ class RestaurantTableViewCell: UITableViewCell {
     internal var type: String? {
         didSet {
             lblType.text = (type != nil ? type : nil)
+        }
+    }
+
+    internal var restaurantImage: String? {
+        didSet {
+            thumbnailImageView.image = (restaurantImage != nil ? UIImage(named: restaurantImage!) : nil)
         }
     }
 }
