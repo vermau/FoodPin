@@ -17,7 +17,7 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
     
 	private var alertView: UIAlertController!
 	private var isVisited = false
-    private var modelController: ModelController!
+    internal var modelController: ModelController!
 	internal var newRestaurant: Restaurant!
 
     // ----------------------------------------------------------------------------------------------------------------------
@@ -62,6 +62,7 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
 			
 			do {
 				try managedObjectContext.save()
+                //try (modelController?.managedObjectContext)!.save()
 			}catch {
 				print(error)
 				return
@@ -87,7 +88,7 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
             -- NSTimer For auto dismissing the UIAlertController
             -- It calls the "dismissAlertController func after 2 seconds of display
             */
-            _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("dismissAlertController"), userInfo: nil, repeats: false)
+            _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(AddRestaurantController.dismissAlertController), userInfo: nil, repeats: false)
         } else {
 				self.saveToDatabase()
 				performSegueWithIdentifier("unwindToHomeScreen", sender: sender)
@@ -149,51 +150,6 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 	
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     // ----------------------------------------------------------------------------------------------------------------------
     // -- Navigation
 

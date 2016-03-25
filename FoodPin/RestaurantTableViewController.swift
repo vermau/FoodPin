@@ -27,6 +27,7 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
             do {
                 try fetchResultController.performFetch()
                 modelController.restaurants = fetchResultController.fetchedObjects as! [Restaurant]
+                print("Total no of restaurants in the database at start = \(modelController.restaurants.count)")
             } catch {
                 print(error)
             }
@@ -73,6 +74,7 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
 		switch (type) {
 		case NSFetchedResultsChangeType.Insert:
 			if let indexPathForNewRecord = newIndexPath {
+                print("IndexPathForNewRecord = \(indexPathForNewRecord)")
 				restaurantListTableView.insertRowsAtIndexPaths([indexPathForNewRecord], withRowAnimation: .Fade)
 			}
 		case NSFetchedResultsChangeType.Delete:
@@ -88,6 +90,7 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
 		}
 		
 		modelController.restaurants = controller.fetchedObjects as! [Restaurant]
+        print("Inside NSFetchedResultsController. Total restaurants after insertion = \(modelController.restaurants.count)")
 	}
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
@@ -269,21 +272,19 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
         return UIStatusBarStyle.LightContent
     }*/
 
-    /*
-                    ---------------------------------------
-                        MARK: - Navigation
-                    ---------------------------------------
-    */
-    
 	@IBAction func close(segue: UIStoryboardSegue) {
     }
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
         if segue.identifier == "restaurantDetail" {
             if let _ = segue.destinationViewController as? RestaurantDetailViewController, let indexPath = restaurantListTableView.indexPathForSelectedRow {
                 modelController.selectedRestaurant = modelController.restaurants[indexPath.row]
+            }
+        } else if segue.identifier == "addRestaurant" {
+            if let navController = segue.destinationViewController as? IQhiredNavigationController {
+                let destinationViewController = navController.viewControllers.first as? AddRestaurantController
+                destinationViewController!.modelController = self.modelController
             }
         }
     }

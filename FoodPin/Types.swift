@@ -127,50 +127,46 @@ struct HELPER {
 	struct AUTOLAYOUT {
 		
 		// -- Sets AutoLayout Constraints for a View
-		static func setFrameAutoLayoutForView(aView: UIView!, top: CGFloat?, var bottom: CGFloat?, leading: CGFloat?, var trailing: CGFloat?, centreViewHorizontallyAndVertically: Bool) {
+		static func setFrameAutoLayoutForView(aView: UIView!, top: CGFloat?, bottom: CGFloat?, leading: CGFloat?, trailing: CGFloat?, centreViewHorizontallyAndVertically: Bool) {
 			var topConstraint = NSLayoutConstraint(), bottomConstraint = NSLayoutConstraint(), leadingConstraint = NSLayoutConstraint(), trailingConstraint = NSLayoutConstraint()
-			//var centreXConstraint = NSLayoutConstraint(), centreYConstraint = NSLayoutConstraint()
 			
 			if centreViewHorizontallyAndVertically == true {
-				bottom = top
-				trailing = leading
-				
 				let centreXConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
-				
 				let centreYConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0)
 				
 				// -- Activate the CentraX and CentreY Autolayout Constraints
 				centreXConstraint.active = true
 				centreYConstraint.active = true
-			}
+            } else {
+                // -- Setup the Top, Bottom, Leading and Trailing Autolayout Constraints for the View
+                if top == nil {
+                    topConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0.0)
+                } else {
+                    topConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: top!)
+                }
+                if bottom == nil {
+                    bottomConstraint = NSLayoutConstraint(item: aView.superview!, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: aView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0.0)
+                } else {
+                    bottomConstraint = NSLayoutConstraint(item: aView.superview!, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: aView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: bottom!)
+                }
+                if leading == nil {
+                    leadingConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.Leading, multiplier: 1.0, constant: 0.0)
+                } else {
+                    leadingConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.Leading, multiplier: 1.0, constant: leading!)
+                }
+                if trailing == nil {
+                    trailingConstraint = NSLayoutConstraint(item: aView.superview!, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: aView, attribute: NSLayoutAttribute.Trailing, multiplier: 1.0, constant: 0.0)
+                } else {
+                    trailingConstraint = NSLayoutConstraint(item: aView.superview!, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: aView, attribute: NSLayoutAttribute.Trailing, multiplier: 1.0, constant: trailing!)
+                }
+                
+                // -- Activate the Top, Bottom, Leading and Trailing Autolayout Constraints
+                topConstraint.active = true
+                bottomConstraint.active = true
+                leadingConstraint.active = true
+                trailingConstraint.active = true
+            }
 			
-			// -- Setup the Top, Bottom, Leading and Trailing Autolayout Constraints for the View
-			if top == nil {
-				topConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0.0)
-			} else {
-				topConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: top!)
-			}
-			if bottom == nil {
-				bottomConstraint = NSLayoutConstraint(item: aView.superview!, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: aView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0.0)
-			} else {
-				bottomConstraint = NSLayoutConstraint(item: aView.superview!, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: aView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: bottom!)
-			}
-			if leading == nil {
-				leadingConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.Leading, multiplier: 1.0, constant: 0.0)
-			} else {
-				leadingConstraint = NSLayoutConstraint(item: aView, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: aView.superview!, attribute: NSLayoutAttribute.Leading, multiplier: 1.0, constant: leading!)
-			}
-			if trailing == nil {
-				trailingConstraint = NSLayoutConstraint(item: aView.superview!, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: aView, attribute: NSLayoutAttribute.Trailing, multiplier: 1.0, constant: 0.0)
-			} else {
-				trailingConstraint = NSLayoutConstraint(item: aView.superview!, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: aView, attribute: NSLayoutAttribute.Trailing, multiplier: 1.0, constant: trailing!)
-			}
-			
-			// -- Activate the Top, Bottom, Leading and Trailing Autolayout Constraints
-			topConstraint.active = true
-			bottomConstraint.active = true
-			leadingConstraint.active = true
-			trailingConstraint.active = true
 		}
 	}
 }
