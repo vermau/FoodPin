@@ -18,8 +18,6 @@
 		FF8A58F21C96B1B50016B5B2 /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A58F11C96B1B50016B5B2 /* ModelController.swift */; };
 		FF96028C1C61878C00535C9C /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF96028B1C61878C00535C9C /* Types.swift */; };
 		FFB621541C5DE77A0053551D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB621531C5DE77A0053551D /* MapViewController.swift */; };
-		FFC0FC381C6340AD00EE66C2 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC0FC361C6340AD00EE66C2 /* Fabric.framework */; };
-		FFC0FC391C6340AD00EE66C2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC0FC371C6340AD00EE66C2 /* Crashlytics.framework */; };
 		FFE828061C565376003C22FF /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE828051C565376003C22FF /* ReviewViewController.swift */; };
 		FFF347721C5F7EBD00F53340 /* AddRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF347711C5F7EBD00F53340 /* AddRestaurantController.swift */; };
 		FFF645701BCFA390004A8B90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF6456F1BCFA390004A8B90 /* AppDelegate.swift */; };
@@ -42,8 +40,6 @@
 		FF8A58F11C96B1B50016B5B2 /* ModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelController.swift; path = Controllers/ModelController.swift; sourceTree = "<group>"; };
 		FF96028B1C61878C00535C9C /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		FFB621531C5DE77A0053551D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		FFC0FC361C6340AD00EE66C2 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		FFC0FC371C6340AD00EE66C2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		FFE828051C565376003C22FF /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		FFF347711C5F7EBD00F53340 /* AddRestaurantController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRestaurantController.swift; sourceTree = "<group>"; };
 		FFF6456C1BCFA390004A8B90 /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,8 +58,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF5AEF9A1C5CEB60002C4220 /* MapKit.framework in Frameworks */,
-				FFC0FC391C6340AD00EE66C2 /* Crashlytics.framework in Frameworks */,
-				FFC0FC381C6340AD00EE66C2 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,8 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				FF5AEF991C5CEB60002C4220 /* MapKit.framework */,
-				FFC0FC361C6340AD00EE66C2 /* Fabric.framework */,
-				FFC0FC371C6340AD00EE66C2 /* Crashlytics.framework */,
 			);
 			name = Frameworks;
 			path = ..;
@@ -257,7 +249,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run d40630a36f77de7cf523b526b29795bf78119b2d 98e2f528c13a60661c621c392c5d3f89555d2f3a3d0f0596165f2ccff0692273";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 

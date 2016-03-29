@@ -27,7 +27,6 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
             do {
                 try fetchResultController.performFetch()
                 modelController.restaurants = fetchResultController.fetchedObjects as! [Restaurant]
-                print("Total no of restaurants in the database at start = \(modelController.restaurants.count)")
             } catch {
                 print(error)
             }
@@ -43,6 +42,7 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
         restaurantListDataSource = RestaurantListDataSource(restaurants: modelController.restaurants)
         restaurantListTableView.dataSource = restaurantListDataSource
         restaurantListTableView.delegate = restaurantListDataSource
+        
         // --Remove the title of the backBarButtonItem so that it only shows "<" in the NavigationBar
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
     }
@@ -52,10 +52,6 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
         // Dispose of any resources that can be recreated.
     }
 
-    /*  
-        --This method responds to View Events everytime
-        --Everytime the ViewController is ABOUT-TO-DISPLAY, this method will be executed
-    */
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //restaurantListTableView.reloadData()
@@ -74,7 +70,6 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
 		switch (type) {
 		case NSFetchedResultsChangeType.Insert:
 			if let indexPathForNewRecord = newIndexPath {
-                print("IndexPathForNewRecord = \(indexPathForNewRecord)")
 				restaurantListTableView.insertRowsAtIndexPaths([indexPathForNewRecord], withRowAnimation: .Fade)
 			}
 		case NSFetchedResultsChangeType.Delete:
@@ -90,44 +85,23 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
 		}
 		
 		modelController.restaurants = controller.fetchedObjects as! [Restaurant]
-        print("Inside NSFetchedResultsController. Total restaurants after insertion = \(modelController.restaurants.count)")
+        
+        /*
+                -- Update the restaurant list in "RestaurantListDataSource"
+                -- 'cuz the TableView ADDS or DELETES the rows based on count returned by the TableViewDataSource
+        */
+        restaurantListDataSource.upadteRestaurantList(modelController.restaurants)
+
 	}
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        /*
+            -- At this stage the TableView calls the methods of "UITableViewDataSource" protocol
+            -- to refresh the no of rows the TableView and to update the data in the TableView
+        */
 		restaurantListTableView.endUpdates()
 	}
 
-	// ----------------------------------------------------------------------------------------------------------------------
-	// -- UITableView Protocol Methods
-
-/*    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows
-        return modelController.restaurants.count
-    }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "Cell"
-        
-        // Forced downcasting the returned cell from UITableViewCell to RestaurantTableViewCell
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! RestaurantTableViewCell
-
-        // Configure the cell...
-        cell.lblName.text = modelController.restaurants[indexPath.row].name
-        cell.lblLocation.text = modelController.restaurants[indexPath.row].location
-        cell.lblType.text = modelController.restaurants[indexPath.row].type
-        cell.thumbnailImageView.image = UIImage(data: modelController.restaurants[indexPath.row].image!)
-        
-        // Rounding the corners of thumbnailImageView. For a perfect circle, set the corner radius to 30 ( half of the width and height of the thumbnailImageView which is 60 )
-        cell.thumbnailImageView.layer.cornerRadius = 30
-        cell.thumbnailImageView.clipsToBounds = true
-        
-        // Set the value of accessortType property by checking the value in the array using the TERNARY OPERATOR for IF ELSE
-		if let isVisited = modelController.restaurants[indexPath.row].isVisited?.boolValue {
-			cell.accessoryType = isVisited ? UITableViewCellAccessoryType.Checkmark : .None
-		}
-		
-        return cell
-    }*/
     
     /*
         -- This method is called when a row is selected in the Table
@@ -290,7 +264,7 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
     }
     
     class RestaurantListDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
-        private let restaurants: [Restaurant]!
+        private var restaurants: [Restaurant]!
         
         init(restaurants: [Restaurant]) {
             self.restaurants = restaurants
@@ -317,6 +291,10 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
             cell.restaurantImage = "restaurant"
             
             return cell
+        }
+        
+        private func upadteRestaurantList(restaurants: [Restaurant]) {
+            self.restaurants = restaurants
         }
         
         private func restaurantAtIndexPath(indexPath: NSIndexPath) -> Restaurant {
