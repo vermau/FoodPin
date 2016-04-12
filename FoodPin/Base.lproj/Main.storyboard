@@ -156,12 +156,11 @@
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgf-Nk-GqO">
                                 <rect key="frame" x="555" y="72" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.96470588235294119" green="0.27843137254901962" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kMg-bP-WBb"/>
                                     <constraint firstAttribute="width" constant="40" id="nwY-XD-KRE"/>
                                 </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.84313725490000002" green="0.2901960784" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button" image="rating"/>
                                 <connections>
                                     <segue destination="0nx-ak-f42" kind="presentation" identifier="showReview" id="wRa-3k-v7L"/>
@@ -173,7 +172,7 @@
                                     <constraint firstAttribute="height" constant="40" id="3gV-hv-X50"/>
                                     <constraint firstAttribute="width" constant="40" id="nMI-zF-fWu"/>
                                 </constraints>
-                                <color key="tintColor" red="0.96470588235294119" green="0.27843137254901962" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.84313725490196079" green="0.29019607843137257" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="map"/>
                                 <connections>
                                     <segue destination="Fs5-Bp-Vfe" kind="show" identifier="showMap" id="Tjz-hh-SEx"/>

@@ -15,7 +15,7 @@ extension CAGradientLayer {
 		let layer = CAGradientLayer()
 		
 		layer.frame = bounds
-		layer.colors = [COLORS.SEAGREEN.toUIColor().CGColor, COLORS.WHITE.toUIColor().CGColor]
+		layer.colors = [COLORS.RED.toUIColor().CGColor, COLORS.WHITE.toUIColor().CGColor]
 		
 		return layer
 	}

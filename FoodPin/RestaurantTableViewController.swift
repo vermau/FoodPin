@@ -13,7 +13,7 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
     @IBOutlet weak var restaurantListTableView: UITableView!
 
 	private var fetchResultController: NSFetchedResultsController!
-    private var restaurantListDataSource: RestaurantListDataSource!
+    private var restaurantListDelegate: RestaurantListDelegate!
     
     private func loadDataFromDatabase() {
         let fetchRequest = NSFetchRequest(entityName: "Restaurant")
@@ -39,9 +39,9 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
         
         //	-- Load data into the TableView from Database. First time it loads all data. Subsequently it loads only changed data
         self.loadDataFromDatabase()
-        restaurantListDataSource = RestaurantListDataSource(restaurants: modelController.restaurants)
-        restaurantListTableView.dataSource = restaurantListDataSource
-        restaurantListTableView.delegate = restaurantListDataSource
+        restaurantListDelegate = RestaurantListDelegate(restaurants: modelController.restaurants)
+        restaurantListTableView.dataSource = restaurantListDelegate
+        restaurantListTableView.delegate = restaurantListDelegate
         
         // --Remove the title of the backBarButtonItem so that it only shows "<" in the NavigationBar
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
@@ -90,14 +90,14 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
                 -- Update the restaurant list in "RestaurantListDataSource"
                 -- 'cuz the TableView ADDS or DELETES the rows based on count returned by the TableViewDataSource
         */
-        restaurantListDataSource.upadteRestaurantList(modelController.restaurants)
+        restaurantListDelegate.upadteRestaurantList(modelController.restaurants)
 
 	}
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
         /*
             -- At this stage the TableView calls the methods of "UITableViewDataSource" protocol
-            -- to refresh the no of rows the TableView and to update the data in the TableView
+            -- to refresh the no of rows in the TableView and to update the data in the TableView
         */
 		restaurantListTableView.endUpdates()
 	}
@@ -263,7 +263,7 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
         }
     }
     
-    class RestaurantListDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+    class RestaurantListDelegate: NSObject, UITableViewDataSource, UITableViewDelegate {
         private var restaurants: [Restaurant]!
         
         init(restaurants: [Restaurant]) {
