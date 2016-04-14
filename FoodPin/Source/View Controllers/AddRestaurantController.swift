@@ -89,10 +89,10 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
             */
             _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(AddRestaurantController.dismissAlertController), userInfo: nil, repeats: false)
         } else {
-				self.saveToDatabase()
-				performSegueWithIdentifier("unwindToHomeScreen", sender: sender)
-			}
+            self.saveToDatabase()
+            performSegueWithIdentifier("unwindToHomeScreen", sender: sender)
         }
+    }
 	
     @IBAction func isVisitedSelection(sender: UIButton) {
         switch (sender.tag) {

@@ -87,7 +87,7 @@ class RestaurantTableViewController: StateController, NSFetchedResultsController
 		modelController.restaurants = controller.fetchedObjects as! [Restaurant]
         
         /*
-                -- Update the restaurant list in "RestaurantListDataSource"
+                -- Update the restaurant list in "restaurantListDelegate"
                 -- 'cuz the TableView ADDS or DELETES the rows based on count returned by the TableViewDataSource
         */
         restaurantListDelegate.upadteRestaurantList(modelController.restaurants)
