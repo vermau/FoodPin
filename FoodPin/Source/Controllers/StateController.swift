@@ -24,4 +24,10 @@ class StateController: UIViewController {
             destinationViewController.modelController = self.modelController
         }
     }
+    
+    internal func prepareForDestinationViewController(destinationViewController: UIViewController) {
+        if let destinationVC = destinationViewController as? StateController {
+            destinationVC.modelController = self.modelController
+        }
+    }
 }

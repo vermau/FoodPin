@@ -10,12 +10,14 @@ import UIKit
 
 class RestaurantDetailViewController: StateController {
     
-    @IBOutlet weak var restaurantImageView : UIImageView!
-    @IBOutlet weak var detailTableView : UITableView!
-    @IBOutlet weak var ratingButton : UIButton!
     @IBOutlet weak var mapButton : UIButton!
+    @IBOutlet weak var ratingButton : UIButton!
+    @IBOutlet weak var detailTableView : UITableView!
+    @IBOutlet weak var restaurantImageView : UIImageView!
+    @IBOutlet weak var gearOptionsView : GearOptionsView!
     
-    private var restaurantDetailsDataSource: RestaurantDetailsDataSource!
+    private var restaurantDetailsDataSource: TableDataSource!
+    private var gearOptionsDelegate: GearOptionsDelegate!
     
     private func setupTableViewAppearance() {
         title = modelController.selectedRestaurant.name
@@ -35,8 +37,12 @@ class RestaurantDetailViewController: StateController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableViewAppearance()
-        restaurantDetailsDataSource = RestaurantDetailsDataSource(restaurant: modelController.selectedRestaurant)
+        
+        restaurantDetailsDataSource = TableDataSource(restaurant: modelController.selectedRestaurant)
         detailTableView.dataSource = restaurantDetailsDataSource
+        gearOptionsDelegate = GearOptionsDelegate(view: gearOptionsView, parentViewController: self)
+        gearOptionsView.gearOptionsViewDelegate = gearOptionsDelegate
+
         /*
         -- Using Nil Coalescing Operator here
         -- ?? will return the value of restaurant.rating if it is not nil
@@ -94,8 +100,48 @@ class RestaurantDetailViewController: StateController {
             //destinationViewController.model = restaurant
         }
     }
+    
+    private func displayViewControllerOnScreen(vcName: String ) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        weak var destinationVC: UIViewController! = nil
+        
+        if vcName == "mapView" {
+            destinationVC = storyboard.instantiateViewControllerWithIdentifier("mapVC") as! MapViewController
+            super.prepareForDestinationViewController(destinationVC)
+            self.navigationController?.pushViewController(destinationVC, animated: true)
+        } else if vcName == "ratingView" {
+            destinationVC = storyboard.instantiateViewControllerWithIdentifier("ratingVC") as! ReviewViewController
+            destinationVC.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+            self.presentViewController(destinationVC, animated: true, completion: nil)
+        }
+    }
 
-    class RestaurantDetailsDataSource: NSObject, UITableViewDataSource {
+    class GearOptionsDelegate: NSObject, GearOptionsViewDelegate {
+        weak var gearOptionsView: GearOptionsView! = nil
+        weak var parentViewController: RestaurantDetailViewController! = nil
+        
+        init(view: UIView, parentViewController: UIViewController) {
+            self.gearOptionsView = view as! GearOptionsView
+            self.parentViewController = parentViewController as! RestaurantDetailViewController
+            gearOptionsView.addInitialHideAnimation()
+        }
+        
+        func gearPressed(gear: UIButton) {
+            gearOptionsView.addOpenOptionsAnimation()
+        }
+        
+        func locationPressed(location: UIButton) {
+            gearOptionsView.addCloseOptionsAnimation()
+            parentViewController.displayViewControllerOnScreen("mapView")
+        }
+        
+        func ratingPressed(rating: UIButton) {
+            gearOptionsView.addCloseOptionsAnimation()
+            parentViewController.displayViewControllerOnScreen("ratingView")
+        }
+    }
+    
+    class TableDataSource: NSObject, UITableViewDataSource {
         private var restaurant: Restaurant!
         
         init(restaurant: Restaurant) {

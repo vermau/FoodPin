@@ -87,7 +87,7 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
             -- NSTimer For auto dismissing the UIAlertController
             -- It calls the "dismissAlertController func after 2 seconds of display
             */
-            _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(AddRestaurantController.dismissAlertController), userInfo: nil, repeats: false)
+            _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(self.dismissAlertController), userInfo: nil, repeats: false)
         } else {
             self.saveToDatabase()
             performSegueWithIdentifier("unwindToHomeScreen", sender: sender)

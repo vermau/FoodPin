@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let modelController = ModelController()
+        let modelController = ModelController() // Create the initial object for ModelController
 
         if let initialController = window?.rootViewController {
             if initialController.isKindOfClass(UINavigationController) {

@@ -23,6 +23,11 @@
 		FF4E32AC1CBFEAB1008CD190 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4E329E1CBFEAB1008CD190 /* ReviewViewController.swift */; };
 		FF4E32B01CBFEAD5008CD190 /* Foodpin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF4E32AE1CBFEAD5008CD190 /* Foodpin.xcdatamodeld */; };
 		FF5AEF9A1C5CEB60002C4220 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5AEF991C5CEB60002C4220 /* MapKit.framework */; };
+		FFE26AE01CC0A8C200D95378 /* GearOptions.coreanimator in Resources */ = {isa = PBXBuildFile; fileRef = FFE26AD71CC0A8C200D95378 /* GearOptions.coreanimator */; };
+		FFE26AE11CC0A8C200D95378 /* GearOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE26AD81CC0A8C200D95378 /* GearOptionsView.swift */; };
+		FFE26AE21CC0A8C200D95378 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE26ADA1CC0A8C200D95378 /* gear.png */; };
+		FFE26AE31CC0A8C200D95378 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE26ADB1CC0A8C200D95378 /* location.png */; };
+		FFE26AE41CC0A8C200D95378 /* rating.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE26ADC1CC0A8C200D95378 /* rating.png */; };
 		FFF645751BCFA390004A8B90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFF645731BCFA390004A8B90 /* Main.storyboard */; };
 		FFF645771BCFA390004A8B90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFF645761BCFA390004A8B90 /* Assets.xcassets */; };
 		FFF6457A1BCFA390004A8B90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFF645781BCFA390004A8B90 /* LaunchScreen.storyboard */; };
@@ -45,6 +50,11 @@
 		FF4E329E1CBFEAB1008CD190 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		FF4E32AF1CBFEAD5008CD190 /* Foodpin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Foodpin.xcdatamodel; sourceTree = "<group>"; };
 		FF5AEF991C5CEB60002C4220 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		FFE26AD71CC0A8C200D95378 /* GearOptions.coreanimator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GearOptions.coreanimator; sourceTree = "<group>"; };
+		FFE26AD81CC0A8C200D95378 /* GearOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GearOptionsView.swift; sourceTree = "<group>"; };
+		FFE26ADA1CC0A8C200D95378 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		FFE26ADB1CC0A8C200D95378 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		FFE26ADC1CC0A8C200D95378 /* rating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rating.png; sourceTree = "<group>"; };
 		FFF6456C1BCFA390004A8B90 /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF645741BCFA390004A8B90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFF645761BCFA390004A8B90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -107,6 +117,7 @@
 				FF4E32951CBFEAB1008CD190 /* IQhiredGradientLayer.swift */,
 				FF4E32961CBFEAB1008CD190 /* Restaurant.swift */,
 				FF4E32971CBFEAB1008CD190 /* Types.swift */,
+				FFE26AD51CC0A8C200D95378 /* GearOptions */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -139,6 +150,26 @@
 			);
 			name = Frameworks;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		FFE26AD51CC0A8C200D95378 /* GearOptions */ = {
+			isa = PBXGroup;
+			children = (
+				FFE26AD71CC0A8C200D95378 /* GearOptions.coreanimator */,
+				FFE26AD81CC0A8C200D95378 /* GearOptionsView.swift */,
+				FFE26AD91CC0A8C200D95378 /* images */,
+			);
+			path = GearOptions;
+			sourceTree = "<group>";
+		};
+		FFE26AD91CC0A8C200D95378 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				FFE26ADA1CC0A8C200D95378 /* gear.png */,
+				FFE26ADB1CC0A8C200D95378 /* location.png */,
+				FFE26ADC1CC0A8C200D95378 /* rating.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 		FFF645631BCFA390004A8B90 = {
@@ -239,7 +270,11 @@
 			files = (
 				FFF6457A1BCFA390004A8B90 /* LaunchScreen.storyboard in Resources */,
 				FFF645771BCFA390004A8B90 /* Assets.xcassets in Resources */,
+				FFE26AE41CC0A8C200D95378 /* rating.png in Resources */,
+				FFE26AE21CC0A8C200D95378 /* gear.png in Resources */,
+				FFE26AE31CC0A8C200D95378 /* location.png in Resources */,
 				FFF645751BCFA390004A8B90 /* Main.storyboard in Resources */,
+				FFE26AE01CC0A8C200D95378 /* GearOptions.coreanimator in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +303,7 @@
 			files = (
 				FF4E32A31CBFEAB1008CD190 /* AppDelegate.swift in Sources */,
 				FF4E32B01CBFEAD5008CD190 /* Foodpin.xcdatamodeld in Sources */,
+				FFE26AE11CC0A8C200D95378 /* GearOptionsView.swift in Sources */,
 				FF4E32A21CBFEAB1008CD190 /* RestaurantTableViewCell.swift in Sources */,
 				FF4E32AC1CBFEAB1008CD190 /* ReviewViewController.swift in Sources */,
 				FF4E32AB1CBFEAB1008CD190 /* RestaurantTableViewController.swift in Sources */,
