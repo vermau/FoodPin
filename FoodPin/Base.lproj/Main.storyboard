@@ -166,20 +166,8 @@
                                     <segue destination="0nx-ak-f42" kind="presentation" identifier="showReview" id="wRa-3k-v7L"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IQu-aB-KTu">
-                                <rect key="frame" x="555" y="120" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="3gV-hv-X50"/>
-                                    <constraint firstAttribute="width" constant="40" id="nMI-zF-fWu"/>
-                                </constraints>
-                                <color key="tintColor" red="0.84313725490196079" green="0.29019607843137257" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="map"/>
-                                <connections>
-                                    <segue destination="Fs5-Bp-Vfe" kind="show" identifier="showMap" id="Tjz-hh-SEx"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoT-9h-A6W" customClass="GearOptionsView" customModule="FoodPin" customModuleProvider="target">
-                                <rect key="frame" x="505" y="180" width="80" height="80"/>
+                                <rect key="frame" x="540" y="110" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="aeU-8v-Rw1"/>
                                     <constraint firstAttribute="width" constant="80" id="ruX-Ay-bM8"/>
@@ -192,18 +180,15 @@
                             <constraint firstItem="h0x-dJ-lgg" firstAttribute="leading" secondItem="Ivr-A9-zrp" secondAttribute="leading" id="941-Ff-Gby"/>
                             <constraint firstAttribute="trailing" secondItem="h0x-dJ-lgg" secondAttribute="trailing" id="NAD-Fn-JeF"/>
                             <constraint firstItem="v6j-aX-33w" firstAttribute="top" secondItem="h0x-dJ-lgg" secondAttribute="bottom" id="WtH-Iz-6PX"/>
-                            <constraint firstItem="IQu-aB-KTu" firstAttribute="top" secondItem="Rgf-Nk-GqO" secondAttribute="bottom" constant="8" id="Yvp-ZP-Q4i"/>
+                            <constraint firstItem="xoT-9h-A6W" firstAttribute="top" secondItem="u83-yX-BNq" secondAttribute="bottom" constant="46" id="j7h-dj-ffz"/>
                             <constraint firstAttribute="trailing" secondItem="Rgf-Nk-GqO" secondAttribute="trailing" constant="5" id="orZ-fH-Z9U"/>
                             <constraint firstItem="h0x-dJ-lgg" firstAttribute="top" secondItem="Ivr-A9-zrp" secondAttribute="top" id="owc-1u-auW"/>
-                            <constraint firstItem="xoT-9h-A6W" firstAttribute="top" secondItem="Ivr-A9-zrp" secondAttribute="topMargin" constant="180" id="q6i-9Z-KeS"/>
-                            <constraint firstAttribute="trailing" secondItem="IQu-aB-KTu" secondAttribute="trailing" constant="5" id="qzF-YQ-JLD"/>
-                            <constraint firstItem="xoT-9h-A6W" firstAttribute="trailing" secondItem="Ivr-A9-zrp" secondAttribute="trailingMargin" constant="5" id="yvx-c9-uqE"/>
+                            <constraint firstItem="xoT-9h-A6W" firstAttribute="trailing" secondItem="Ivr-A9-zrp" secondAttribute="trailingMargin" constant="40" id="yvx-c9-uqE"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="detailTableView" destination="h0x-dJ-lgg" id="fnm-cd-XXM"/>
                         <outlet property="gearOptionsView" destination="xoT-9h-A6W" id="4qX-f3-Lax"/>
-                        <outlet property="mapButton" destination="IQu-aB-KTu" id="guV-yb-8h3"/>
                         <outlet property="ratingButton" destination="Rgf-Nk-GqO" id="W1d-t2-tFn"/>
                         <outlet property="restaurantImageView" destination="v2C-rC-w7v" id="uE9-Wd-sKp"/>
                     </connections>
@@ -517,7 +502,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKm-Xe-GRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2531" y="-23"/>
+            <point key="canvasLocation" x="2531" y="-47"/>
         </scene>
         <!--Review View Controller-->
         <scene sceneID="uGr-vO-Txd">
@@ -676,7 +661,6 @@
         <image name="dislike" width="84" height="84"/>
         <image name="good" width="256" height="256"/>
         <image name="great" width="256" height="256"/>
-        <image name="map" width="48" height="48"/>
         <image name="photoalbum" width="84" height="84"/>
         <image name="rating" width="256" height="256"/>
     </resources>

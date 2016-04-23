@@ -10,7 +10,6 @@ import UIKit
 
 class RestaurantDetailViewController: StateController {
     
-    @IBOutlet weak var mapButton : UIButton!
     @IBOutlet weak var ratingButton : UIButton!
     @IBOutlet weak var detailTableView : UITableView!
     @IBOutlet weak var restaurantImageView : UIImageView!
@@ -89,16 +88,20 @@ class RestaurantDetailViewController: StateController {
         let reviewViewController = segue.sourceViewController as! ReviewViewController
         if let newRating = reviewViewController.rating {
             ratingButton.setImage(UIImage(named: newRating), forState: UIControlState.Normal)
+            
+            // -- Set the color of the rating button depending upon the actual rating
+            switch (newRating) {
+                case "dislike": ratingButton.tintColor = COLORS.RED.toUIColor()
+                case "good": ratingButton.tintColor = COLORS.BLUE.toUIColor()
+                case "great": ratingButton.tintColor = COLORS.SEAGREEN.toUIColor()
+            default: break
+            }
+            
             modelController.selectedRestaurant.rating = newRating
         }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showMap" {
-            super.prepareForSegue(segue, sender: sender)
-            //let destinationViewController = segue.destinationViewController as! MapViewController
-            //destinationViewController.model = restaurant
-        }
     }
     
     private func displayViewControllerOnScreen(vcName: String ) {
