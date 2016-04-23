@@ -50,7 +50,8 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
         // Dispose of any resources that can be recreated.
     }
 	
-	private func saveToDatabase() {
+    // --Saves New Restaurant details to database
+	private func saveNewRecord() {
 		if let managedObjectContext = modelController?.managedObjectContext {
 			newRestaurant = NSEntityDescription.insertNewObjectForEntityForName("Restaurant", inManagedObjectContext: managedObjectContext) as! Restaurant
 			newRestaurant.name = nameTextField.text!
@@ -59,13 +60,9 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
 			newRestaurant.phone = phoneTextField.text!
 			newRestaurant.isVisited = isVisited
 			newRestaurant.image = UIImagePNGRepresentation(imageView.image!)
-			
-			do {
-				try managedObjectContext.save()
-			}catch {
-				print(error)
-				return
-			}
+			newRestaurant.rating = nil
+            
+            modelController.saveContext()
 		}
 	}
 	
@@ -89,7 +86,7 @@ class AddRestaurantController: UITableViewController, UIImagePickerControllerDel
             */
             _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(self.dismissAlertController), userInfo: nil, repeats: false)
         } else {
-            self.saveToDatabase()
+            self.saveNewRecord()
             performSegueWithIdentifier("unwindToHomeScreen", sender: sender)
         }
     }

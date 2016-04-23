@@ -92,11 +92,10 @@ class RestaurantDetailViewController: StateController {
             // -- Set the color of the rating button depending upon the actual rating
             switch (newRating) {
                 case "dislike": ratingButton.tintColor = COLORS.RED.toUIColor()
-                case "good": ratingButton.tintColor = COLORS.BLUE.toUIColor()
+                case "good": ratingButton.tintColor = COLORS.TOMATO.toUIColor()
                 case "great": ratingButton.tintColor = COLORS.SEAGREEN.toUIColor()
             default: break
             }
-            
             modelController.selectedRestaurant.rating = newRating
         }
     }
@@ -122,6 +121,7 @@ class RestaurantDetailViewController: StateController {
     class GearOptionsDelegate: NSObject, GearOptionsViewDelegate {
         weak var gearOptionsView: GearOptionsView! = nil
         weak var parentViewController: RestaurantDetailViewController! = nil
+        private var gearButtonPressed: Bool = false
         
         init(view: UIView, parentViewController: UIViewController) {
             self.gearOptionsView = view as! GearOptionsView
@@ -130,7 +130,9 @@ class RestaurantDetailViewController: StateController {
         }
         
         func gearPressed(gear: UIButton) {
-            gearOptionsView.addOpenOptionsAnimation()
+            gearButtonPressed = !gearButtonPressed
+            if gearButtonPressed { gearOptionsView.addOpenOptionsAnimation() }
+            else { gearOptionsView.addCloseOptionsAnimation() }
         }
         
         func locationPressed(location: UIButton) {
